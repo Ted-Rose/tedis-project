@@ -2,7 +2,7 @@
 
 abstract class Product
 {
-    public function addProduct($json, $newProduct)
+    public function addProduct($json)
     {
         $sku = $json["sku"];
         $name = $json["name"];
@@ -19,8 +19,6 @@ abstract class Product
 
     public function deleteProduct($json)
     {
-        $sku = $json["sku"];
-
         // Create query
         $query = "DELETE FROM {$this->tableName} 
         WHERE sku = ?";

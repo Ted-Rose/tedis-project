@@ -121,7 +121,12 @@ $(document).ready(function () {
 
     var price = $("#product_form").find('input[name="price"]').val();
 
-    var url = "https://" + window.location.host + "/server/index.php";
+    // For localhost:
+    var url = "http://localhost:3000/server/index.php";
+
+    // For 000webhost:
+/*     var url = "https://" + window.location.host + "/server/index.php";
+ */
 
     //Get data from product type specific inputboxes
     if (document.getElementById("size").value.length != "") {

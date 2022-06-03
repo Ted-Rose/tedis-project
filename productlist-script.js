@@ -12,11 +12,15 @@ function createProductList() {
   // Create an array to store objects
   myApp.arr = [];
 
-  myApp.API = "https://" + window.location.host + "/server/index.php";
+  // For localhost:
+  myApp.url = "http://localhost:3000/server/index.php";
 
+  // For 000webhost:
+/*   myApp.url = "https://" + window.location.host + "/server/index.php";
+ */
   // Create axios get request
   axios
-    .get(myApp.API)
+    .get(myApp.url)
     .then(function (response) {
       // Insert all data to array
       myApp.arr.push(response.data);
@@ -53,7 +57,7 @@ function receiveDataFromBoxes() {
 
         // Make delete request implement deleting product
         axios
-          .delete(myApp.API, { data: obj })
+          .delete(myApp.url, { data: obj })
           .then(function (response) {
             console.log(response);
           })
@@ -72,7 +76,7 @@ function receiveDataFromBoxes() {
 // Box creator for products
 function createBoxTemplates(Product, i) {
   //Use p and div tags for storing elements
-  var newP = $("<p></p>");
+  var newP = $("<p id='productFrame'></p>");
   var skuDiv = $("<div>" + Object.values(Product)[0] + "</div>");
   var nameDiv = $("<div>" + Object.values(Product)[1] + "</div>");
   var priceDiv = $(
