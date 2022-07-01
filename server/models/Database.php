@@ -1,11 +1,9 @@
 <?php
 
-require_once "userData.php";
-
 class Database
 {
     public function getConnection()
-    {        
+    {
         $servername = "localhost";
         $username = "id18674598_example_username";
         $password = "j5M[=j\~\}qL(W{%";
@@ -13,8 +11,10 @@ class Database
 
         $conn = "mysql:host=$servername; dbname=$dbname; charset=utf8mb4";
         $options = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
+            PDO::ATTR_EMULATE_PREPARES, false,
+            PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        );
         return new PDO($conn, $username, $password, $options);
     }
 
@@ -27,7 +27,7 @@ class Database
         $bookTable = $conn->prepare("SELECT * FROM book");
         $bookTable->execute();
         $resultBookTable = $bookTable->fetchAll(PDO::FETCH_ASSOC);
-        
+
         //Get data from dvd table
         $dvdTable = $conn->prepare("SELECT * FROM dvd");
         $dvdTable->execute();
@@ -42,9 +42,11 @@ class Database
         $result = array_merge($resultBookTable, $resultDvdTable, $resultFurnitureTable);
 
         //Sort data by sku
-        usort($result, function ($item1, $item2) {
-            return $item1['sku'] <=> $item2['sku'];
-        }
+        usort(
+            $result,
+            function ($item1, $item2) {
+                return $item1['sku'] <=> $item2['sku'];
+            }
         );
 
         echo json_encode($result);
@@ -53,12 +55,30 @@ class Database
         $this->conn = null;
     }
 
-    public function insertDataToTable($query)
+    public function insertDataToTable($preparedQuery)
     {
         //Get connection to database
         $conn = $this->getConnection();
+
+        $table = $preparedQuery[0];
+        $sku = $preparedQuery[1];
+        $name = $preparedQuery[2];
+        $price = $preparedQuery[3];
+        $lastvalName = $preparedQuery[4];
+        $lastval = $preparedQuery[5];
         
-        $statement = $conn->prepare($query);
+
+        $statement = $conn->prepare("INSERT INTO $table (sku, name, price, $lastvalName) 
+            VALUES (:sku, :name, :price, :lastval)");
+
+        /*  $statement->bindValue('table', $table);*/
+        $statement->bindValue('sku', $sku, PDO::PARAM_INT);
+        $statement->bindValue('name', $name, PDO::PARAM_STR);
+        $statement->bindValue('price', $price, PDO::PARAM_INT);
+        $statement->bindValue('lastval', $lastval, PDO::PARAM_STR);
+
+        echo "<br> var_dump: <br>";
+        var_dump($statement);
 
         $statement->execute();
 
@@ -70,8 +90,8 @@ class Database
     {
         //Get connection to database
         $conn = $this->getConnection();
-       
-        $stmt= $conn->prepare($query);
+
+        $stmt = $conn->prepare($query);
 
         //Execute mysql statement 
         $stmt->execute([$sku]);
@@ -80,7 +100,8 @@ class Database
         $this->conn = null;
     }
 
-    public function cors() {
+    public function cors()
+    {
         // Allow from any origin
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -89,22 +110,18 @@ class Database
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Max-Age: 86400');    // cache for 1 day
         }
-    
+
         // Access-Control headers are received during OPTIONS requests
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    
+
             if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
                 // may also be using PUT, PATCH, HEAD etc
-                header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");         
-    
+                header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE");
+
             if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
                 header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-    
+
             exit(0);
         }
     }
 }
-
-
-
-

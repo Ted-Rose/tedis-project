@@ -8,16 +8,16 @@ class DatabaseManager
 {
     public function addProduct($json, $newProduct)
     {
-        $query = $newProduct->addProduct($json);
+        $preparedQuery = $newProduct->addProduct($json);
 
         $database1 = new Database();
 
-        $database1->insertDataToTable($query);
+        $database1->insertDataToTable($preparedQuery);
     }
 
     public function deleteProduct($json, $deleteProduct)
     {
-        $query = $deleteProduct->deleteProduct($json);
+        $query = $deleteProduct->deleteProduct();
 
         $sku = $json["sku"];
 

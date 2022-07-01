@@ -4,20 +4,20 @@ abstract class Product
 {
     public function addProduct($json)
     {
+        
         $sku = $json["sku"];
         $name = $json["name"];
         $price = $json["price"];
         $lastVal = $json["lastVal"];
 
-        // Create query
-        $query = "INSERT INTO {$this->tableName} 
-        (sku, name, price, {$this->attributeName}) 
-        VALUES ('$sku', '$name', $price, '$lastVal')";
+        // Prepare array of query data
+        $preparedQuery = [$this->tableName, $sku, $name, $price, $this->attributeName, $lastVal];
+        echo "preparedQuery: " . json_encode($preparedQuery);
         
-        return $query;
+        return $preparedQuery;
     }
 
-    public function deleteProduct($json)
+    public function deleteProduct()
     {
         // Create query
         $query = "DELETE FROM {$this->tableName} 

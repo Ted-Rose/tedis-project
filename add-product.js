@@ -169,7 +169,7 @@ $(document).ready(function () {
     });
   }
 
-  function ReturnToProductList() {
+  /* function ReturnToProductList() {
     window.location.href = "/";
-  }
+  } */
 });
