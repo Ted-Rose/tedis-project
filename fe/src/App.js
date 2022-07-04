@@ -5,27 +5,26 @@ import Header from './Header';
 import Content from './Content';
 
 import Footer from './Footer';
-
+/* 
 import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
-} from "react-router-dom";
+} from "react-router-dom"; */
 
-/* function App() {
+function App() {
     return (
       <div className="box">
             <Header />
-            <hr className='line'></hr>
             <Content />
             <Footer />
       </div>
     );
-  } */
+  }
 
-function App() {
+/* function App() {
   return (
     <Router>
       <div>
@@ -43,8 +42,9 @@ function App() {
           </ul>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+         A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. 
+
         <Switch>
           <Route path="/about">
             <About />
@@ -71,7 +71,7 @@ function About() {
 
 function Users() {
   return <h2>Users</h2>;
-}
+} */
 
 
 export default App;

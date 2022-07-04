@@ -1,16 +1,17 @@
 .header {
   height: 60px;
+  flex: 0 1 auto;
 }
 
 h1 {
-    position: absolute;
-    left: 20px;
+  position: absolute;
+  left: 20px;
 }
 
 .add-product-btn {
-    position: absolute;
-    right: 170px;
-    top: 40px;
+  position: absolute;
+  right: 170px;
+  top: 40px;
 }
 .delete-product-btn {
   position: absolute;
@@ -18,3 +19,9 @@ h1 {
   top: 40px;
 }
 
+.line {
+  position: relative;
+  top: 100%;
+  width: 95%;
+  height: 1;
+}

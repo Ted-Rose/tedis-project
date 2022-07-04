@@ -1,4 +1,11 @@
 .footer {
-    flex: auto;
-    height: 20%;
+  height: 60px;
+  flex: 0 1 auto;
+}
+
+.footer .line {
+  position: relative;
+  top: -0px;
+  width: 95%;
+  height: 1px;
 }

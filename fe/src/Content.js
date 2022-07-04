@@ -1,9 +1,5 @@
-import "./Content.scss"
+import "./Content.scss";
 
-const Content = () => (
-    <div className="content">
-
-    </div>
-);
+const Content = () => <div className="content"></div>;
 
 export default Content;
