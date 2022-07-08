@@ -1,18 +1,17 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class Database
 {
     public function getConnection()
     {
-/*         $servername = "localhost";
-        $username = "id18674598_example_username";
-        $password = "j5M[=j\~\}qL(W{%";
-        $dbname = "id18674598_example_db"; */
-
-        $servername = "sql309.epizy.com";
+        /* $servername = "sql309.epizy.com"; */
+        $servername = "localhost";
         $username = "epiz_32077569";
         $password = "Mrr4r8T4t6SN60";
-        $dbname = "epiz_32077569_XXX";
+        $dbname = "epiz_32077569_products";
 
         $conn = "mysql:host=$servername; dbname=$dbname; charset=utf8mb4";
         $options = array(
