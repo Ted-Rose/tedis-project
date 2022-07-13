@@ -122,7 +122,7 @@ $(document).ready(function () {
     var price = $("#product_form").find('input[name="price"]').val();
 
     // For localhost:
-    var url = "http://localhost:3000/server/index.php";
+    var url = "http://localhost:8000/tedis-project/be/models/ProductTables.php";
 
     // For 000webhost:
 /*     var url = "https://" + window.location.host + "/server/index.php";
@@ -130,12 +130,12 @@ $(document).ready(function () {
 
     //Get data from product type specific inputboxes
     if (document.getElementById("size").value.length != "") {
-      var type = "Dvd";
+      var type = "dvd";
 
       var lastVal = $("#product_form").find('input[name="size"]').val();
     }
     if (document.getElementById("height").value.length != "") {
-      var type = "Furniture";
+      var type = "furniture";
 
       var height = $("#product_form").find('input[name="height"]').val();
 
@@ -147,7 +147,7 @@ $(document).ready(function () {
       var lastVal = height + "x" + width + "x" + length;
     }
     if (document.getElementById("weight").value.length != "") {
-      var type = "Book";
+      var type = 'book';
 
       var lastVal = $("#product_form").find('input[name="weight"]').val();
     }
@@ -164,12 +164,12 @@ $(document).ready(function () {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj),
-    }).then((responseJson) => {
+    })/* .then((responseJson) => {
       ReturnToProductList(responseJson);
-    });
+    }) */;
   }
 
-  /* function ReturnToProductList() {
+  function ReturnToProductList() {
     window.location.href = "/";
-  } */
+  }
 });

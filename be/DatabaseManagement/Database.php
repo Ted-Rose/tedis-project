@@ -1,31 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
+require_once "GetConnection.php";
 
 class Database
 {
-    public function getConnection()
-    {
-        /* $servername = "sql309.epizy.com"; */
-        $servername = "localhost";
-        $username = "epiz_32077569";
-        $password = "Mrr4r8T4t6SN60";
-        $dbname = "epiz_32077569_products";
-
-        $conn = "mysql:host=$servername; dbname=$dbname; charset=utf8mb4";
-        $options = array(
-            PDO::ATTR_EMULATE_PREPARES, false,
-            PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        );
-        return new PDO($conn, $username, $password, $options);
-    }
-
     public function getRequest()
     {
-        //Get connection to database
-        $conn = $this->getConnection();
+        $getConnection = new GetConnection;
+        $conn = $getConnection->getConnection();
 
         //Get data from book table
         $bookTable = $conn->prepare("SELECT * FROM book");
@@ -59,10 +41,10 @@ class Database
         $this->conn = null;
     }
 
-    public function insertDataToTable($preparedQuery)
+    public function addProduct($preparedQuery)
     {
-        //Get connection to database
-        $conn = $this->getConnection();
+        $getConnection = new GetConnection;
+        $conn = $getConnection->getConnection();
 
         $table = $preparedQuery[0];
         $sku = $preparedQuery[1];
@@ -70,30 +52,46 @@ class Database
         $price = $preparedQuery[3];
         $lastvalName = $preparedQuery[4];
         $lastval = $preparedQuery[5];
-        
+
 
         $statement = $conn->prepare("INSERT INTO $table (sku, name, price, $lastvalName) 
             VALUES (:sku, :name, :price, :lastval)");
 
-        /*  $statement->bindValue('table', $table);*/
         $statement->bindValue('sku', $sku, PDO::PARAM_INT);
         $statement->bindValue('name', $name, PDO::PARAM_STR);
         $statement->bindValue('price', $price, PDO::PARAM_INT);
         $statement->bindValue('lastval', $lastval, PDO::PARAM_STR);
 
-        echo "<br> var_dump: <br>";
-        var_dump($statement);
-
         $statement->execute();
+
+        echo $name . " added to database";
 
         //Close connection
         $this->conn = null;
     }
 
-    public function deleteDataFromTable($query, $sku)
+    public function insertEmailToTable($email)
     {
-        //Get connection to database
-        $conn = $this->getConnection();
+        $getConnection = new GetConnection;
+        $conn = $getConnection->getConnection();
+
+        $statement = $conn->prepare("INSERT INTO clients (email) 
+            VALUES (:email)");
+
+        $statement->bindValue('email', $email, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        echo $email . "added to database";
+
+        //Close connection
+        $this->conn = null;
+    }
+
+    public function deleteProduct($query, $sku)
+    {
+        $getConnection = new GetConnection;
+        $conn = $getConnection->getConnection();
 
         $stmt = $conn->prepare($query);
 
