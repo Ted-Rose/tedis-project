@@ -7,7 +7,6 @@ const Header = () => (
     <button className="delete-product-btn" id="delete-product-btn">
       MASS DELETE
     </button>
-    <hr className="line"></hr>
   </div>
 );
 

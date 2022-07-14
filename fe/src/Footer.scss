@@ -1,11 +1,15 @@
 .footer {
-  height: 60px;
+  height: 30px;
   flex: 0 1 auto;
+  border-top: 1px solid #000000;
+  background-color: #111111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.footer .line {
-  position: relative;
-  top: -0px;
-  width: 95%;
-  height: 1px;
+.footer .description {
+    color: #AEAEAE;
+    font-size: 14px;
+    font-family: "HelveticaNeueW01-55Roma", Helvetica, sans-serif;
 }

@@ -13,7 +13,7 @@ function Content() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://localhost:8000/be/index.php");
+      const response = await fetch("http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php");
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -76,13 +76,13 @@ function Content() {
 
   return (
     <div className="content">
-      <section>
+{/*       <section>
         <ProductAdd onAddMovie={addMovieHandler} />
       </section>
       <section>
         <button onClick={fetchProductsHandler}>Fetch Movies</button>
       </section>
-      <section>{content}</section>
+      <section>{content}</section> */}
     </div>
   );
 }
