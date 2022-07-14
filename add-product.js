@@ -122,7 +122,7 @@ $(document).ready(function () {
     var price = $("#product_form").find('input[name="price"]').val();
 
     // For localhost:
-    var url = "http://localhost:8000/tedis-project/be/models/ProductTables.php";
+    var url = "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php";
 
     // For 000webhost:
 /*     var url = "https://" + window.location.host + "/server/index.php";

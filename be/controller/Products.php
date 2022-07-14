@@ -2,15 +2,15 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once "../DatabaseManagement/Database.php";
+require_once "../model/databaseManagement/Database.php";
 
-require_once "./Products/Book.php";
+require_once "../model/Book.php";
 
-require_once "./Products/Dvd.php";
+require_once "../model/Dvd.php";
 
-require_once "./Products/Furniture.php";
+require_once "../model/Furniture.php";
 
-require_once "./Products/Product.php";
+require_once "../model/Product.php";
 
 require_once ".././CustomException.php";
 

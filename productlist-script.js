@@ -13,7 +13,7 @@ function createProductList() {
   myApp.arr = [];
 
   // For localhost:
-  myApp.url = "http://localhost:8000/tedis-project/be/models/ProductTables.php";
+  myApp.url = "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php";
 
   // For 000webhost:
 /*   myApp.url = "https://" + window.location.host + "/server/index.php";

@@ -1,7 +1,6 @@
 <?php
 
-require_once "../DatabaseManagement/Database.php";
-
+require_once "../model/databaseManagement/Database.php";
 
 abstract class Product
 {

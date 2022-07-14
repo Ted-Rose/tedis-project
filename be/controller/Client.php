@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once "../DatabaseManagement/Database.php";
+require_once "../model/databaseManagement/Database.php";
 
 require_once "../CustomException.php";
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $database1 = new Database();
 
-        $database1->insertEmailToTable($content);
+        $database1->insertEmailToTable($json);
     } else {
         print_r("'$'content is false!");
     }

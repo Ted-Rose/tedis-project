@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once "GetConnection.php";
 
 class Database
@@ -7,7 +9,7 @@ class Database
     public function getRequest()
     {
         $getConnection = new GetConnection;
-        $conn = $getConnection->getConnection();
+        $conn = $getConnection->connect();
 
         //Get data from book table
         $bookTable = $conn->prepare("SELECT * FROM book");
@@ -44,7 +46,7 @@ class Database
     public function addProduct($preparedQuery)
     {
         $getConnection = new GetConnection;
-        $conn = $getConnection->getConnection();
+        $conn = $getConnection->connect();
 
         $table = $preparedQuery[0];
         $sku = $preparedQuery[1];
@@ -73,7 +75,7 @@ class Database
     public function insertEmailToTable($email)
     {
         $getConnection = new GetConnection;
-        $conn = $getConnection->getConnection();
+        $conn = $getConnection->connect();
 
         $statement = $conn->prepare("INSERT INTO clients (email) 
             VALUES (:email)");
@@ -82,7 +84,7 @@ class Database
 
         $statement->execute();
 
-        echo $email . "added to database";
+        echo $email . " added to database";
 
         //Close connection
         $this->conn = null;
@@ -91,7 +93,7 @@ class Database
     public function deleteProduct($query, $sku)
     {
         $getConnection = new GetConnection;
-        $conn = $getConnection->getConnection();
+        $conn = $getConnection->connect();
 
         $stmt = $conn->prepare($query);
 
