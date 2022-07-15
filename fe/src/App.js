@@ -1,10 +1,13 @@
 import './App.scss';
 
-import Header from './Header';
+import Header from './ProductListHeader';
 
-import Content from './Content';
+import ProductListContent from './ProductListContent';
 
 import Footer from './Footer';
+
+import { Outlet, Link } from "react-router-dom";
+
 /* 
 import React from "react";
 import {
@@ -18,8 +21,11 @@ function App() {
     return (
       <div className="box">
             <Header />
-            <Content />
+            <ProductListContent />
+            <Outlet />
             <Footer />
+            
+
       </div>
     );
   }

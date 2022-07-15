@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import ProductList from "./ProductList";
-import ProductAdd from "./ProductAdd";
-import "./Content.scss";
+import ProductAdd from "./routes/ProductAdd";
+import "./ProductListContent.scss";
 
-function Content() {
+function ProductListContent() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -87,4 +87,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default ProductListContent;
