@@ -1,16 +1,13 @@
 import { useState } from "react";
 
-const useInput = () => {
+const FormValidator = () => {
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
-  const valueIsEmpty = isTouched && enteredValue.trim() === "";
-  const valueIsEmail = enteredValue.includes("@");
-  const valueIsNumber =
-    !(enteredValue.trim() === "") && isNaN(enteredValue) && isTouched;
-
-  /* const valueIsValid =
-    validateValue(enteredValue) && !valueIsEmpty && isTouched; */
-  const hasError = /* !valueIsValid &&  */ isTouched && !valueIsEmpty;
+  const valueIsEmpty = isTouched && enteredValue.trim() == "";
+  const valueNotNumber = !enteredValue.trim() == "" && isNaN(enteredValue);
+  const noSpecialChars = /^[a-zA-Z0-9]{1,100}$/;
+  const ValueHasSpecialChars =
+    !noSpecialChars.test(enteredValue) && !enteredValue.trim() == "";
 
   const valueChangeHandler = (event) => {
     setEnteredValue(event.target.value); //enteredName is scheduled to be updated, but
@@ -26,19 +23,26 @@ const useInput = () => {
     setIsTouched(false);
   };
 
+  const requiredError = (
+    <p className="error-text">Please, submit required data</p>
+  );
+  const dataError = (
+    <p className="error-text">Please, provide the data of indicated type</p>
+  );
+
   return {
     value: enteredValue,
-    /* isValid: valueIsValid, */
-    empty: valueIsEmpty,
-    isEmail: valueIsEmail,
-    isNumber: valueIsNumber,
-    hasError,
+    isEmpty: valueIsEmpty,
+    notNumber: valueNotNumber,
+    hasSpecialChars: ValueHasSpecialChars,
     //Used hasError instead of "hasError: hasError",
     //because in modern JavaScript syntax you don't need to right the same value twice
     valueChangeHandler,
     inputBlurHandler,
-    reset,
+      reset,
+      requiredError,
+    dataError,
   };
 };
 
-export default useInput;
+export default FormValidator;

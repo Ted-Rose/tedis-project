@@ -10,7 +10,7 @@ const Header = () => {
             <button
                 className="add-product-btn"
                 onClick={() => {
-                    navigate("/ProductAdd");
+                    navigate("/add-product");
                 }}
             >
                 ADD

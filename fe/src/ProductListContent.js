@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import ProductList from "./ProductList";
-import ProductAdd from "./routes/ProductAdd";
+import AddProduct from "./routes/AddProduct";
 import "./ProductListContent.scss";
 
 function ProductListContent() {
