@@ -1,4 +1,4 @@
-import './App.scss';
+import './ProductList.scss';
 
 import Header from './ProductListHeader';
 
@@ -17,7 +17,7 @@ import {
   Link
 } from "react-router-dom"; */
 
-function App() {
+function ProductList() {
     return (
       <div className="box">
             <Header />
@@ -80,4 +80,4 @@ function Users() {
 } */
 
 
-export default App;
+export default ProductList;

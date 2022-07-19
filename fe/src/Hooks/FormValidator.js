@@ -8,14 +8,17 @@ const FormValidator = () => {
   const noSpecialChars = /^[a-zA-Z0-9]{1,100}$/;
   const ValueHasSpecialChars =
     !noSpecialChars.test(enteredValue) && !enteredValue.trim() == "";
+  const inputClasses =
+    !valueIsEmpty && !ValueHasSpecialChars
+      ? "form-control"
+      : "form-control invalid";
 
   const valueChangeHandler = (event) => {
-    setEnteredValue(event.target.value); //enteredName is scheduled to be updated, but
-    //not yet updated
+    setEnteredValue(event.target.value);
   };
 
-  const inputBlurHandler = (event) => {
-    setIsTouched(true); //If lost focus it means user touched field
+  const inputBlurHandler = () => {
+    setIsTouched(true);
   };
 
   const reset = () => {
@@ -35,13 +38,12 @@ const FormValidator = () => {
     isEmpty: valueIsEmpty,
     notNumber: valueNotNumber,
     hasSpecialChars: ValueHasSpecialChars,
-    //Used hasError instead of "hasError: hasError",
-    //because in modern JavaScript syntax you don't need to right the same value twice
     valueChangeHandler,
     inputBlurHandler,
-      reset,
-      requiredError,
+    reset,
+    requiredError,
     dataError,
+    inputClasses,
   };
 };
 

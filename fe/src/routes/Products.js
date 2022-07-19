@@ -1,9 +1,9 @@
 import React from "react";
 
 import Product from "./Product";
-import "./ProductList.scss";
+import "./Products.scss";
 
-const ProductList = (props) => {
+const Products = (props) => {
   return (
     <ul className="product-list">
       {props.products.map((product) => (
@@ -19,4 +19,4 @@ const ProductList = (props) => {
   );
 };
 
-export default ProductList;
+export default Products;
