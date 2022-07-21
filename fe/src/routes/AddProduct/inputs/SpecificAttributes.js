@@ -1,20 +1,25 @@
 import { useState, useRef } from "react";
 import { forwardRef, useImperativeHandle } from "react";
-import Dvd from "../inputs/Dvd";
-import Book from "../inputs/Book";
-import Furniture from "../inputs/Furniture";
+import Dvd from "./Dvd";
+import Book from "./Book";
+import Furniture from "./Furniture";
 
 const SpecificAttributes = forwardRef((props, ref) => {
   const [productType, setproductType] = useState("");
   const changeProductType = (e) => {
-      props.changeType(e.target.value);;
+    props.changeType(e.target.value);
       setproductType(e.target.value);
+      props.setIsValid(false);
   };
 
   const specificAttributeRef = useRef();
 
   const changeSpecificAttribute = (e) => {
     props.setValue(e);
+  };
+
+  const changeSpecificAttributesIsValid = (e) => {
+    props.setIsValid(e);
   };
   const typeSwitcherOptions = [
     {
@@ -33,13 +38,13 @@ const SpecificAttributes = forwardRef((props, ref) => {
       label: "Book",
       value: "book",
     },
-    ];
-    
-    useImperativeHandle(ref, () => ({
-        reset() {
-            specificAttributeRef.current.reset();
-        },
-      }));
+  ];
+
+  useImperativeHandle(ref, () => ({
+    reset() {
+      specificAttributeRef.current.reset();
+    },
+  }));
 
   return (
     <div>
@@ -51,18 +56,24 @@ const SpecificAttributes = forwardRef((props, ref) => {
         ))}
       </select>
       {productType.includes("dvd") && (
-        <Dvd ref={specificAttributeRef} setValue={changeSpecificAttribute} />
+        <Dvd
+          ref={specificAttributeRef}
+          setValue={changeSpecificAttribute}
+          setIsValid={changeSpecificAttributesIsValid}
+        />
       )}
       {productType.includes("furniture") && (
         <Furniture
           ref={specificAttributeRef}
           setValue={changeSpecificAttribute}
+          setIsValid={changeSpecificAttributesIsValid}
         />
       )}
       {productType.includes("book") && (
         <Book
           ref={specificAttributeRef}
           setValue={changeSpecificAttribute}
+          setIsValid={changeSpecificAttributesIsValid}
         />
       )}
     </div>

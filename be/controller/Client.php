@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $database1->insertEmailToTable($json);
     } else {
-        print_r("'$'content is false!");
+        echo("'$'content is false!");
     }
 
 }

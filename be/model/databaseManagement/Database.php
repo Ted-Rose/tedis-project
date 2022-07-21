@@ -52,21 +52,23 @@ class Database
         $sku = $preparedQuery[1];
         $name = $preparedQuery[2];
         $price = $preparedQuery[3];
-        $lastvalName = $preparedQuery[4];
-        $lastval = $preparedQuery[5];
+        $specificAttributeName = $preparedQuery[4];
+        $specificAttribute = $preparedQuery[5];
 
 
-        $statement = $conn->prepare("INSERT INTO $table (sku, name, price, $lastvalName) 
-            VALUES (:sku, :name, :price, :lastval)");
+        $statement = $conn->prepare("INSERT INTO $table (sku, name, price, $specificAttributeName) 
+            VALUES (:sku, :name, :price, :specificAttribute)");
 
         $statement->bindValue('sku', $sku, PDO::PARAM_INT);
         $statement->bindValue('name', $name, PDO::PARAM_STR);
         $statement->bindValue('price', $price, PDO::PARAM_INT);
-        $statement->bindValue('lastval', $lastval, PDO::PARAM_STR);
+        $statement->bindValue('specificAttribute', $specificAttribute, PDO::PARAM_STR);
 
         $statement->execute();
 
         echo $name . " added to database";
+
+        var_dump($statement);
 
         //Close connection
         $this->conn = null;

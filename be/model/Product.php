@@ -9,9 +9,9 @@ abstract class Product
         $sku = $json["sku"];
         $name = $json["name"];
         $price = $json["price"];
-        $lastVal = $json["lastVal"];
+        $specificAttribute = $json["specificAttribute"];
 
-        $productQuery = [$this->tableName, $sku, $name, $price, $this->attributeName, $lastVal];
+        $productQuery = [$this->tableName, $sku, $name, $price, $this->attributeName, $specificAttribute];
 
         $database = new Database();
 

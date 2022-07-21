@@ -1,5 +1,5 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../Hooks/FormValidator";
+import FormValidator from "../../../Hooks/FormValidator";
 
 const Furniture = forwardRef((props, ref) => {
   const {
@@ -34,17 +34,31 @@ const Furniture = forwardRef((props, ref) => {
 
   const changeHeightValue = (e) => {
     setHeightValue(e.target.value);
-    props.setValue(
-      e.target.value + "x" + widthValue + "x" + lengthValue
-    );
+    props.setValue(e.target.value + "x" + widthValue + "x" + lengthValue);
+    props.setIsValid(
+      !furnitureHeightIsEmpty &
+        !furnitureHeightNotNumber &
+        !furnitureWidthIsEmpty &
+        !furnitureWidthNotNumber &
+        !furnitureLengthIsEmpty &
+        !furnitureLengthNotNumber
+      );
+      console.log(furnitureWidthNotNumber);
+      
   };
 
   const [widthValue, setWidthValue] = useState("");
 
   const changeWidthValue = (e) => {
     setWidthValue(e.target.value);
-    props.setValue(
-        heightValue + "x" + e.target.value + "x" + lengthValue
+    props.setValue(heightValue + "x" + e.target.value + "x" + lengthValue);
+    props.setIsValid(
+      !furnitureHeightIsEmpty &
+        !furnitureHeightNotNumber &
+        !furnitureWidthIsEmpty &
+        !furnitureWidthNotNumber &
+        !furnitureLengthIsEmpty &
+        !furnitureLengthNotNumber
     );
   };
 
@@ -52,8 +66,14 @@ const Furniture = forwardRef((props, ref) => {
 
   const changeLengthValue = (e) => {
     setLengthValue(e.target.value);
-    props.setValue(
-        heightValue + "x" + widthValue + "x" + e.target.value
+    props.setValue(heightValue + "x" + widthValue + "x" + e.target.value);
+    props.setIsValid(
+      !furnitureHeightIsEmpty &
+        !furnitureHeightNotNumber &
+        !furnitureWidthIsEmpty &
+        !furnitureWidthNotNumber &
+        !furnitureLengthIsEmpty &
+        !furnitureLengthNotNumber
     );
   };
 

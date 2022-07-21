@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import "./AddProduct.scss";
-import Sku from "../inputs/Sku";
-import Name from "../inputs/Name";
-import Price from "../inputs/Price";
-import SpecificAttributes from "./SpecificAttributes";
-/* import AddProductToDatabase from "../AddProductToDatabase";
- */
+import Sku from "./inputs/Sku";
+import Name from "./inputs/Name";
+import Price from "./inputs/Price";
+import SpecificAttributes from "./inputs/SpecificAttributes";
+import AddProductToDatabase from "./AddProductToDatabase";
+
 const AddProduct = () => {
   let navigate = useNavigate();
 
@@ -41,23 +41,41 @@ const AddProduct = () => {
     setSpecificAttribute(e);
   };
 
+  const [skuIsValid, setSkuIsValid] = useState(false);
+
+  const changeSkuIsValid = (e) => {
+    setSkuIsValid(e);
+  };
+
+  const [nameIsValid, setNameIsValid] = useState(false);
+
+  const changeNameIsValid = (e) => {
+    setNameIsValid(e);
+  };
+
+  const [priceIsValid, setPriceIsValid] = useState(false);
+
+  const changePriceIsValid = (e) => {
+    setPriceIsValid(e);
+  };
+
+  const [specificAttributesIsValid, setSpecificAttributesIsValid] =
+    useState(false);
+
+  const changeSpecificAttributesIsValid = (e) => {
+    setSpecificAttributesIsValid(e);
+  };
+
   const skuRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
   const specificAttributesRef = useRef();
 
-  let formIsValid = true;
+  let formIsValid = false;
 
-  /*    if (
-    !skuIsEmpty &&
-    !skuHasSpecialChars &&
-    !nameIsEmpty &&
-    !nameHasSpecialChars &&
-    !priceIsEmpty &&
-    !priceNotNumber
-  ) {
+  if (skuIsValid && nameIsValid && priceIsValid && specificAttributesIsValid) {
     formIsValid = true;
-  } */
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -66,35 +84,44 @@ const AddProduct = () => {
       return;
     }
 
-    const productFormData = {
+    let productFormData = {
       sku: skuValue,
       name: nameValue,
       price: priceValue,
       specificAttribute: specificAttribute,
       productType: productType,
     };
-    /*     AddProductToDatabase(productFormData);
-     */
+    AddProductToDatabase(productFormData);
+
     console.log("Submitted!");
     console.log(productFormData);
 
-    skuRef.current.reset();
-    nameRef.current.reset();
-    priceRef.current.reset();
-    specificAttributesRef.current.reset();
-    /* navigate("/"); */
+    navigate("/");
   };
 
   return (
     <div>
       <form onSubmit={submitHandler} id="product_form">
-        <Sku ref={skuRef} setValue={changeSkuValue} />
-        <Name ref={nameRef} setValue={changeNameValue} />
-        <Price ref={priceRef} setValue={changePriceValue} />
+        <Sku
+          ref={skuRef}
+          setValue={changeSkuValue}
+          setIsValid={changeSkuIsValid}
+        />
+        <Name
+          ref={nameRef}
+          setValue={changeNameValue}
+          setIsValid={changeNameIsValid}
+        />
+        <Price
+          ref={priceRef}
+          setValue={changePriceValue}
+          setIsValid={changePriceIsValid}
+        />
         <SpecificAttributes
           ref={specificAttributesRef}
           setValue={changeSpecificAttribute}
           changeType={changeProductType}
+          setIsValid={changeSpecificAttributesIsValid}
         />
         <div className="form-actions">
           <button disabled={!formIsValid}>Submit</button>

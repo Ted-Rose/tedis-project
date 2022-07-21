@@ -23,24 +23,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = file_get_contents('php://input', true);
     if ($content !== false) {
-        $json = json_decode(trim($content), true);
+        $json = json_decode($content, true);
         if (is_array($json)) {
             try {
-                if (class_exists($json["type"]) === FALSE) {
-                    throw new CustomException($json["type"]);
+                if (class_exists($json["productType"]) === FALSE) {
+                    throw new CustomException($json["productType"]);
                 } else {
                     //create $newProduct object in specific product type class
-                    $newProduct = new $json["type"]($json);
+                    $newProduct = new $json["productType"]($json);
                     $newProduct->addProduct($json, $newProduct);
                 }
             } catch (CustomException $e) {
                 echo $e->classDoesNotExist();
             }
         } else {
-            print_r("'$'json is not array");
+            echo("'$'json is not array");
         }
     } else {
-        print_r("'$'content is false!");
+        echo("'$'content is false!");
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $content = file_get_contents('php://input', true);
@@ -48,20 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $json = json_decode(trim($content), true);
         if (is_array($json)) {
             try {
-                if (class_exists($json["type"]) === FALSE) {
-                    throw new CustomException($json["type"]);
+                if (class_exists($json["productType"]) === FALSE) {
+                    throw new CustomException($json["productType"]);
                 } else {
                     //create $newProduct object in specific product type class
-                    $deleteProduct = new $json["type"]($json);
+                    $deleteProduct = new $json["productType"]($json);
                     $deleteProduct->deleteProduct($json);
                 }
             } catch (CustomException $e) {
                 echo $e->classDoesNotExist();
             }
         } else {
-            print_r("'$'json is not array");
+            echo("'$'json is not array");
         }
     } else {
-        print_r("'$'content is false!");
+        echo("'$'content is false!");
     }
 }

@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../Hooks/FormValidator";
+import FormValidator from "../../../Hooks/FormValidator";
 
-const Book = forwardRef((props, ref) => {
+const Price = forwardRef((props, ref) => {
   const {
     value,
     isEmpty,
@@ -16,6 +16,7 @@ const Book = forwardRef((props, ref) => {
 
   const changeValue = (e) => {
     props.setValue(e.target.value);
+    props.setIsValid(!isEmpty & !notNumber);
   };
 
   useImperativeHandle(ref, () => ({
@@ -26,11 +27,9 @@ const Book = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="weight" className="inputLabel">
-        Weight (KG)
-      </label>
+      <label htmlFor="name">Price</label>
       <input
-        id="weight"
+        id="price"
         type="text"
         value={value}
         onChange={(e) => {
@@ -38,14 +37,10 @@ const Book = forwardRef((props, ref) => {
           changeValue(e);
         }}
         onBlur={inputBlurHandler}
-        name="weight"
       />
       {isEmpty && requiredError}
       {notNumber && dataError}
-      <label htmlFor="weight" className="description">
-        Please provide size in KG
-      </label>
     </div>
   );
 });
-export default Book;
+export default Price;

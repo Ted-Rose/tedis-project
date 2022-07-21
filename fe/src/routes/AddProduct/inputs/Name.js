@@ -1,11 +1,11 @@
 import { forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../Hooks/FormValidator";
+import FormValidator from "../../../Hooks/FormValidator";
 
-const Price = forwardRef((props, ref) => {
+const Name = forwardRef((props, ref) => {
   const {
     value,
     isEmpty,
-    notNumber,
+    hasSpecialChars,
     valueChangeHandler,
     inputBlurHandler,
     reset,
@@ -15,7 +15,8 @@ const Price = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue(e.target.value);
+      props.setValue(e.target.value);
+      props.setIsValid(!isEmpty & !hasSpecialChars);
   };
 
   useImperativeHandle(ref, () => ({
@@ -26,9 +27,9 @@ const Price = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="name">Price</label>
+      <label htmlFor="name">Name</label>
       <input
-        id="price"
+        id="name"
         type="text"
         value={value}
         onChange={(e) => {
@@ -38,8 +39,8 @@ const Price = forwardRef((props, ref) => {
         onBlur={inputBlurHandler}
       />
       {isEmpty && requiredError}
-      {notNumber && dataError}
+      {hasSpecialChars && dataError}
     </div>
   );
 });
-export default Price;
+export default Name;

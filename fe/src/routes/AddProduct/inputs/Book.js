@@ -1,11 +1,11 @@
 import { forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../Hooks/FormValidator";
+import FormValidator from "../../../Hooks/FormValidator";
 
-const Name = forwardRef((props, ref) => {
+const Book = forwardRef((props, ref) => {
   const {
     value,
     isEmpty,
-    hasSpecialChars,
+    notNumber,
     valueChangeHandler,
     inputBlurHandler,
     reset,
@@ -16,6 +16,7 @@ const Name = forwardRef((props, ref) => {
 
   const changeValue = (e) => {
     props.setValue(e.target.value);
+    props.setIsValid(!isEmpty & !notNumber);
   };
 
   useImperativeHandle(ref, () => ({
@@ -26,9 +27,11 @@ const Name = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="name">Name</label>
+      <label htmlFor="weight" className="inputLabel">
+        Weight (KG)
+      </label>
       <input
-        id="name"
+        id="weight"
         type="text"
         value={value}
         onChange={(e) => {
@@ -36,10 +39,14 @@ const Name = forwardRef((props, ref) => {
           changeValue(e);
         }}
         onBlur={inputBlurHandler}
+        name="weight"
       />
       {isEmpty && requiredError}
-      {hasSpecialChars && dataError}
+      {notNumber && dataError}
+      <label htmlFor="weight" className="description">
+        Please provide size in KG
+      </label>
     </div>
   );
 });
-export default Name;
+export default Book;

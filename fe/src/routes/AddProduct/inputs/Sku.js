@@ -1,11 +1,11 @@
 import { forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../Hooks/FormValidator";
+import FormValidator from "../../../Hooks/FormValidator";
 
-const Dvd = forwardRef((props, ref) => {
+const Sku = forwardRef((props, ref) => {
   const {
     value,
     isEmpty,
-    notNumber,
+    hasSpecialChars,
     valueChangeHandler,
     inputBlurHandler,
     reset,
@@ -16,6 +16,7 @@ const Dvd = forwardRef((props, ref) => {
 
   const changeValue = (e) => {
     props.setValue(e.target.value);
+    props.setIsValid(!isEmpty & !hasSpecialChars);
   };
 
   useImperativeHandle(ref, () => ({
@@ -26,11 +27,9 @@ const Dvd = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="size" className="inputLabel">
-        Size (MB)
-      </label>
+      <label htmlFor="name">SKU</label>
       <input
-        id="dvd"
+        id="sku"
         type="text"
         value={value}
         onChange={(e) => {
@@ -38,14 +37,10 @@ const Dvd = forwardRef((props, ref) => {
           changeValue(e);
         }}
         onBlur={inputBlurHandler}
-        name="size"
       />
       {isEmpty && requiredError}
-      {notNumber && dataError}
-      <label htmlFor="size" className="description">
-        Please provide size in MB
-      </label>
+      {hasSpecialChars && dataError}
     </div>
   );
 });
-export default Dvd;
+export default Sku;
