@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import ProductList from "./ProductList";
+import CreateProductList from "./CreateProductList";
 /* import AddProduct from "./AddProduct"; */
 import "./ProductListContent.scss";
+
+const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
 function ProductListContent() {
   const [products, setProducts] = useState([]);
@@ -13,7 +15,9 @@ function ProductListContent() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php");
+      const response = await fetch(
+        "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php"
+      );
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -28,7 +32,7 @@ function ProductListContent() {
           sku: data[key].sku,
           name: data[key].name,
           price: data[key].price,
-          specificAttribute: data[key].weight,
+          specificAttribute: data[key].specificAttribute,
         });
       }
 
@@ -44,26 +48,10 @@ function ProductListContent() {
     fetchProductsHandler();
   }, [fetchProductsHandler]);
 
-  async function addMovieHandler(movie) {
-    // Course author used firebase API, but I didn't.
-    // So I didn't try post option
-    const response = await fetch("http://localhost:8000/be/index.php", {
-      method: "POST",
-      body: JSON.stringify(movie),
-      headers: {
-        //Would work even if not following line would be added, but
-        // many API's might require this API
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    console.log(data);
-  }
-
   let content = <p>Found no products.</p>;
 
   if (products.length > 0) {
-    content = <ProductList products={products} />;
+    content = <CreateProductList products={products} />;
   }
 
   if (error) {
@@ -74,15 +62,15 @@ function ProductListContent() {
     content = <p>Loading...</p>;
   }
 
+  const [total, setTotal] = useState(0);
+
   return (
     <div className="content">
-{/*       <section>
-        <ProductAdd onAddMovie={addMovieHandler} />
-      </section>
-      <section>
-        <button onClick={fetchProductsHandler}>Fetch Movies</button>
-      </section>
-      <section>{content}</section> */}
+      <div className="toppings-list-item">
+        <div className="left-section">Total:</div>
+        <div className="right-section">{getFormattedPrice(total)}</div>
+      </div>
+      <section>{content}</section>
     </div>
   );
 }

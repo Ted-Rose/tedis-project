@@ -1,9 +1,12 @@
-import React from "react";
-
+import { useState } from "react";
 import Product from "./Product";
-import "./Products.scss";
+import "./CreateProductList.scss";
 
-const Products = (props) => {
+const CreateProductList = (props) => {
+    const [checkedState, setCheckedState] = useState(
+        new Array(props.products.length).fill(false)
+    );
+
   return (
     <ul className="product-list">
       {props.products.map((product) => (
@@ -19,4 +22,4 @@ const Products = (props) => {
   );
 };
 
-export default Products;
+export default CreateProductList;

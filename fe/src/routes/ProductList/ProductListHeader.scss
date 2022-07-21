@@ -1,5 +1,5 @@
 .header {
-  height: 30px;
+  height: 55px;
   flex: 0 1 auto;
   border-bottom: 1px solid #000000;
   margin: 10px;
@@ -11,8 +11,8 @@
 }
 
 h1 {
-  position: absolute;
-  left: 20px;
+  float: left;
+  margin: 5px 0 0 5px;
   font-size: 24px;
   display: inline;
   text-transform: none;
@@ -23,7 +23,6 @@ h1 {
   display: inline;
   float: right;
   font-size: 14px;
-  background-color: #dfe5e8;
   line-height: 25px;
   border: none;
 }
@@ -32,7 +31,7 @@ h1 {
   display: inline;
   float: right;
   font-size: 14px;
-  background-color: #dfe5e8;
   line-height: 25px;
   border: none;
 }
+

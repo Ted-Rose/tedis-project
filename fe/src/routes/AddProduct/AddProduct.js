@@ -124,7 +124,14 @@ const AddProduct = () => {
           setIsValid={changeSpecificAttributesIsValid}
         />
         <div className="form-actions">
-          <button disabled={!formIsValid}>Submit</button>
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Cancel
+          </button>
+          <button disabled={!formIsValid}>Save</button>
         </div>
       </form>
       <Footer />

@@ -4,7 +4,7 @@ import Header from './ProductListHeader';
 
 import ProductListContent from './ProductListContent';
 
-import Footer from './Footer';
+import Footer from './../Footer';
 
 import { Outlet, Link } from "react-router-dom";
 
@@ -22,7 +22,7 @@ function ProductList() {
       <div className="box">
             <Header />
             <ProductListContent />
-            <Outlet />
+{/*             <Outlet /> */}
             <Footer />
             
 
