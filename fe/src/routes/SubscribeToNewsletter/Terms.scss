@@ -1,0 +1,35 @@
+.subscription-terms {
+  padding-top: 20px;
+  align-items: middle;
+}
+
+.subscription-terms p {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  text-indent: 15px;
+  /* identical to box height, or 175% */
+  color: #6a707b;
+}
+
+.subscription-terms p span {
+  color: black;
+  text-decoration: underline;
+}
+
+.subscription-terms p span:hover {
+  color: #4066a5;
+}
+
+.subscription-terms p span:active {
+    color: #233759;
+  }
+  
+@media only screen and (min-width: 920px) {
+  .subscription-terms {
+    padding-top: 54px;
+    padding-left: 40px;
+  }
+}

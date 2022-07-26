@@ -10,34 +10,19 @@ class Database
     {
         $getConnection = new GetConnection;
         $conn = $getConnection->connect();
-
-        //Get data from book table
-        $bookTable = $conn->prepare("SELECT * FROM book");
-        $bookTable->execute();
-        $resultBookTable = $bookTable->fetchAll(PDO::FETCH_ASSOC);
-
-        //Get data from dvd table
-        $dvdTable = $conn->prepare("SELECT * FROM dvd");
-        $dvdTable->execute();
-        $resultDvdTable = $dvdTable->fetchAll(PDO::FETCH_ASSOC);
-
-        //Get data from furniture table
-        $furnitureTable = $conn->prepare("SELECT * FROM furniture");
-        $furnitureTable->execute();
-        $resultFurnitureTable = $furnitureTable->fetchAll(PDO::FETCH_ASSOC);
-
-        //Merge data from all tables
-        $result = array_merge($resultBookTable, $resultDvdTable, $resultFurnitureTable);
-
+        $productsTable = $conn->prepare("SELECT * FROM products");
+        $productsTable->execute();
+        $resultProductsTable = $productsTable->fetchAll(PDO::FETCH_ASSOC);
+        
         //Sort data by sku
         usort(
-            $result,
+            $resultProductsTable,
             function ($item1, $item2) {
                 return $item1['sku'] <=> $item2['sku'];
             }
         );
 
-        echo json_encode($result);
+        echo json_encode($resultProductsTable);
 
         //Close connection
         $this->conn = null;
@@ -48,27 +33,30 @@ class Database
         $getConnection = new GetConnection;
         $conn = $getConnection->connect();
 
-        $table = $preparedQuery[0];
-        $sku = $preparedQuery[1];
-        $name = $preparedQuery[2];
-        $price = $preparedQuery[3];
-        $specificAttributeName = $preparedQuery[4];
-        $specificAttribute = $preparedQuery[5];
+        $sku = $preparedQuery[0];
+        $name = $preparedQuery[1];
+        $price = $preparedQuery[2];
+        $productType = $preparedQuery[3];
+        $specificAttribute = $preparedQuery[4];
+        $specificAttributeValue = $preparedQuery[5];
+        $measureUnit = $preparedQuery[6];
 
+        $statement = $conn->prepare("INSERT IGNORE INTO products (sku, name, price, product_type, specific_attribute, specific_attribute_value, measure_unit) 
+            VALUES (:sku, :name, :price, :productType, :specificAttribute, :specificAttributeValue, :measureUnit)");
 
-        $statement = $conn->prepare("INSERT INTO $table (sku, name, price, $specificAttributeName) 
-            VALUES (:sku, :name, :price, :specificAttribute)");
-
-        $statement->bindValue('sku', $sku, PDO::PARAM_INT);
+        $statement->bindValue('sku', $sku, PDO::PARAM_STR);
         $statement->bindValue('name', $name, PDO::PARAM_STR);
         $statement->bindValue('price', $price, PDO::PARAM_INT);
+        $statement->bindValue('productType', $productType, PDO::PARAM_STR);
         $statement->bindValue('specificAttribute', $specificAttribute, PDO::PARAM_STR);
-
+        $statement->bindValue('specificAttributeValue', $specificAttributeValue, PDO::PARAM_STR);
+        $statement->bindValue('measureUnit', $measureUnit, PDO::PARAM_STR);
+        
         $statement->execute();
 
         echo $name . " added to database";
 
-        var_dump($statement);
+        
 
         //Close connection
         $this->conn = null;
@@ -104,6 +92,8 @@ class Database
 
         //Close connection
         $this->conn = null;
+
+        return;
     }
 
     public function cors()

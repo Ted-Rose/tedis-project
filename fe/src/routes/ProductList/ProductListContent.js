@@ -4,8 +4,6 @@ import CreateProductList from "./CreateProductList";
 /* import AddProduct from "./AddProduct"; */
 import "./ProductListContent.scss";
 
-const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
-
 function ProductListContent() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +14,8 @@ function ProductListContent() {
     setError(null);
     try {
       const response = await fetch(
-        "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php"
+          "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php"
+          /* "http://tedisproject.infinityfreeapp.com/be/controller/Client.php" */
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -28,16 +27,17 @@ function ProductListContent() {
 
       for (const key in data) {
         loadedProducts.push({
-          id: key,
+          id: data[key].id,
           sku: data[key].sku,
           name: data[key].name,
           price: data[key].price,
-          specificAttribute: data[key].specificAttribute,
+          productType: data[key].product_type,
+          specificAttribute: data[key].specific_attribute,
+          specificAttributeValue: data[key].specific_attribute_value,
+          measureUnit: data[key].measure_unit,
         });
       }
-
       setProducts(loadedProducts);
-      console.log(loadedProducts);
     } catch (error) {
       setError(error.message);
     }
@@ -62,14 +62,8 @@ function ProductListContent() {
     content = <p>Loading...</p>;
   }
 
-  const [total, setTotal] = useState(0);
-
   return (
     <div className="content">
-      <div className="toppings-list-item">
-        <div className="left-section">Total:</div>
-        <div className="right-section">{getFormattedPrice(total)}</div>
-      </div>
       <section>{content}</section>
     </div>
   );

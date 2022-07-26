@@ -88,13 +88,12 @@ const AddProduct = () => {
       sku: skuValue,
       name: nameValue,
       price: priceValue,
-      specificAttribute: specificAttribute,
       productType: productType,
+      specificAttributeValue: specificAttribute,
     };
     AddProductToDatabase(productFormData);
 
     console.log("Submitted!");
-    console.log(productFormData);
 
     navigate("/");
   };

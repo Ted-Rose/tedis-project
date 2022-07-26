@@ -1,0 +1,88 @@
+.subscribe-content {
+  flex: auto;
+  background-image: url("./Images/image_summer-mobile.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribe-content__frame {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  position: absolute;
+  box-sizing: border-box;
+  width: 335px;
+  padding: 30px 20px 30px 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f5fa 100%);
+}
+
+.subscribe-content__frame h1 {
+  flex: auto;
+  margin: 0;
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 34px;
+  vertical-align: baseline;
+  color: #131821;
+}
+
+.subscribe-content__frame h2 {
+  flex: auto;
+  padding-top: 10px;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
+  color: #6a707b;
+}
+
+.subscribe-frame__line {
+  height: 1px;
+  background: #e3e3e4;
+  width: 295px;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 920px) {
+  .subscribe-content      {
+    background-image: none;
+  }
+
+  .subscribe-content__frame {
+    flex: auto;
+    background: none;
+    padding: 0px 0px 10px 91px;
+    margin: 0px;
+    width: 663px;
+    height: 463px;
+  }
+
+  .subscribe-content__frame h1 {
+    flex: none;
+    padding-left: 40px;
+    width: 399px;
+    height: 44px;
+    font-size: 32px;
+  }
+
+  .subscribe-content__frame h2 {
+    flex: none;
+    padding-top: 11px;
+    padding-left: 40px;
+    width: 400px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .subscribe-frame__line {
+    width: 400px;
+    margin-left: 40px;
+    margin-top: 48px;
+  }
+}

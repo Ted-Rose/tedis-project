@@ -1,11 +1,19 @@
 import "./ProductListHeader.scss";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   let navigate = useNavigate();
   return (
-    <div className="header">
+    <div className="product-list-header">
       <h1>Product List</h1>
+      <button
+        className="add-product-btn"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Subscribe
+      </button>
       <button
         className="add-product-btn"
         onClick={() => {

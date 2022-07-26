@@ -1,0 +1,122 @@
+.subscribe-form-box {
+  flex: auto;
+  padding-top: 20px;
+}
+
+.subscribe-form-box__form__vl {
+  position: absolute;
+  top: 146px;
+  left: 20px;
+  width: 4px;
+  height: 60px;
+  background: #4066a5;
+}
+
+.subscribe-form-box__form__vl.error {
+  background: #b80808;
+}
+
+.email-input {
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e3e3e4;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6a707b;
+  text-indent: 16px;
+  padding-right: 15%;
+}
+
+.email-input:focus {
+  box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
+}
+
+.email-input:hover {
+  box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
+  border-color: #4066a5;
+}
+
+.email-input.error {
+  border: 1px solid #b80808;
+  box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
+}
+
+.subscribe-submit-button {
+  height: 60px;
+  width: 62px;
+  position: absolute;
+  top: 146px;
+  right: 16px;
+  padding: 0;
+  border: none;
+  background: center no-repeat url("./Images/ic_arrow.svg");
+}
+
+.message.hide {
+  display: none;
+}
+
+.approved.message {
+  display: unset;
+  padding-top: 6px;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 150% */
+  color: rgb(33, 172, 51);
+}
+
+.message.error {
+  display: unset;
+  color: #b80808;
+}
+
+@media only screen and (min-width: 920px) {
+  .subscribe-form-box {
+    flex: none;
+    width: 663px;
+    height: 70px;
+    padding-top: 50px;
+    padding-left: 0px;
+  }
+
+  .subscribe-form-box__form__vl {
+    top: 160px;
+    left: 91px;
+    height: 70px;
+  }
+
+  .email-input {
+    height: 70px;
+    text-indent: 41px;
+  }
+
+  .subscribe-submit-button {
+    top: 188px;
+    right: -51px;
+    width: 24px;
+    height: 14px;
+    border: none;
+  }
+
+  .approved-message {
+    position: relative;
+    top: 20px;
+    font-size: 16px;
+    line-height: 12px;
+  }
+
+  .error-message {
+    position: relative;
+    top: 20px;
+    font-size: 16px;
+    line-height: 12px;
+  }
+}

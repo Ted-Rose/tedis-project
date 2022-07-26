@@ -1,4 +1,4 @@
-.header {
+.product-list-header {
   height: 55px;
   flex: 0 1 auto;
   border-bottom: 1px solid #000000;
@@ -10,7 +10,7 @@
   line-height: 1.1;
 }
 
-h1 {
+.product-list-header h1 {
   float: left;
   margin: 5px 0 0 5px;
   font-size: 24px;

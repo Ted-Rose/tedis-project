@@ -1,0 +1,22 @@
+.checkbox {
+  width: 26px;
+  height: 26px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid #e3e3e4;
+  border-radius: 3px;
+}
+
+.checkbox:checked {
+  background-image: url("./Images/ic_checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 11px;
+  background-color: #4066a5;
+  border-color: #4066a5;
+}

@@ -4,6 +4,7 @@ require_once "Product.php";
 
 class Dvd extends Product
 {      
-    public $tableName = "dvd";
-    public $attributeName = "size";
+    public $productType = "dvd";
+    public $specificAttribute = "size";
+    public $measureUnit = "MB";
 }
