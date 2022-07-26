@@ -2,9 +2,12 @@ import { useState } from "react";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
 import "./CreateProductList.scss";
-const getFormattedPrice = (price) => `${price.toFixed(2)} $`;
+import Links from "../../Links";
+
+const getFormattedPrice = (price) => `${Number(price).toFixed(2)} $`;
 
 const CreateProductList = (props) => {
+
   let navigate = useNavigate();
   const [checkedState, setCheckedState] = useState(
     new Array(props.products.length).fill(false)
@@ -41,17 +44,13 @@ const CreateProductList = (props) => {
   };
 
   async function sendDeleteRequest(i) {
-    const response = await fetch(
-      /* "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php" */
-            "http://tedisproject.infinityfreeapp.com/be/controller/Products.php",
-      {
-        method: "DELETE",
-        body: JSON.stringify(props.products[i]),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(Links["products"], {
+      method: "DELETE",
+      body: JSON.stringify(props.products[i]),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.text();
     console.log(data);
 

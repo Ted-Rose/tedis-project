@@ -4,6 +4,8 @@ import CreateProductList from "./CreateProductList";
 /* import AddProduct from "./AddProduct"; */
 import "./ProductListContent.scss";
 
+import Links from "../../Links";
+
 function ProductListContent() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,10 +15,7 @@ function ProductListContent() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-          "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php"
-          /* "http://tedisproject.infinityfreeapp.com/be/controller/Client.php" */
-      );
+      const response = await fetch(Links["products"]);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }

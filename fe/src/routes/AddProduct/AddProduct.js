@@ -95,7 +95,7 @@ const AddProduct = () => {
 
     console.log("Submitted!");
 
-    navigate("/");
+    navigate("/productlist");
   };
 
   return (
@@ -125,7 +125,7 @@ const AddProduct = () => {
         <div className="form-actions">
           <button
             onClick={() => {
-              navigate("/");
+              navigate("/productlist");
             }}
           >
             Cancel

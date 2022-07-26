@@ -13,7 +13,7 @@
   padding-right: 20px;
 }
 
-.subscription-header__links a {
+.subscribe-btn {
   text-decoration: none;
   font-family: "Arial";
   font-style: normal;
@@ -22,6 +22,8 @@
   line-height: 24px;
   /* identical to box height, or 171% */
   color: #6a707b;
+  background-color: transparent;
+  border: none;
 }
 
 .subscription-header__logo {
@@ -50,7 +52,7 @@
     padding-right: 30px;
   }
 
-  .subscription-header__links a {
+  .subscribe-btn {
     height: 26px;
     font-size: 16px;
     line-height: 26px;

@@ -1,7 +1,8 @@
+import Links from "../../Links";
+
 async function AddProductToDatabase(productFormData) {
   const response = await fetch(
-    "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Products.php",
-    /* "http://tedisproject.infinityfreeapp.com/be/controller/Products.php", */
+    Links["products"],
     {
       method: "POST",
       body: JSON.stringify(productFormData),

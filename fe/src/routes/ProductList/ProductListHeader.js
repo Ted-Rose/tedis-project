@@ -17,7 +17,7 @@ const Header = () => {
       <button
         className="add-product-btn"
         onClick={() => {
-          navigate("/add-product");
+          navigate("/addproduct");
         }}
       >
         ADD

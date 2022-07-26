@@ -1,7 +1,7 @@
+import Links from "../../Links";
+
 async function AddEmailToDatabase(emailInput) {
-  const response = await fetch(
-      /* "http://localhost:8000/Local_documents/GitHub/tedis-project/be/controller/Client.php", */
-    "http://tedisproject.infinityfreeapp.com/be/controller/Client.php",
+  const response = await fetch(Links["clients"],
     {
       method: "POST",
       body: JSON.stringify(emailInput),
