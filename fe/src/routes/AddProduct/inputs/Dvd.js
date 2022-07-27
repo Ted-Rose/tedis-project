@@ -15,8 +15,8 @@ const Dvd = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-      props.setValue(e.target.value);
-      props.setIsValid(!isEmpty & !notNumber);
+    props.setValue(e.target.value);
+    props.setIsValid(!isEmpty & !notNumber);
   };
 
   useImperativeHandle(ref, () => ({

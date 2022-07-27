@@ -1,14 +1,9 @@
 import { useState } from "react";
-import Product from "./Product";
-import { useNavigate } from "react-router-dom";
 import "./CreateProductList.scss";
-import Links from "../../Links";
 
 const getFormattedPrice = (price) => `${Number(price).toFixed(2)} $`;
 
 const CreateProductList = (props) => {
-
-  let navigate = useNavigate();
   const [checkedState, setCheckedState] = useState(
     new Array(props.products.length).fill(false)
   );
@@ -21,6 +16,7 @@ const CreateProductList = (props) => {
     );
 
     setCheckedState(updatedCheckedState);
+    props.changeUpdatedCheckedState(updatedCheckedState);
 
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
@@ -35,39 +31,11 @@ const CreateProductList = (props) => {
     setTotal(totalPrice);
   };
 
-  const deleteProducts = () => {
-    for (let i = 0; i < checkedState.length; i++) {
-      if (checkedState[i] === true) sendDeleteRequest(i);
-      console.log(props.products[i]);
-    }
-    return;
-  };
-
-  async function sendDeleteRequest(i) {
-    const response = await fetch(Links["products"], {
-      method: "DELETE",
-      body: JSON.stringify(props.products[i]),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.text();
-    console.log(data);
-
-    navigate("/");
-  }
-
   return (
     <ul className="product-list">
-      <button
-        className="delete-product-btn"
-        id="delete-product-btn"
-        onClick={deleteProducts}
-      >
-        MASS DELETE
-      </button>
-      <div className="left-section">Cart total value: </div>
-      <div className="right-section">{getFormattedPrice(total)}</div>
+      <div className="cart-value">
+        Cart total value: {getFormattedPrice(total)}
+      </div>
       {props.products.map(
         (
           {

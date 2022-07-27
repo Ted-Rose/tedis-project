@@ -92,9 +92,6 @@ const AddProduct = () => {
       specificAttributeValue: specificAttribute,
     };
     AddProductToDatabase(productFormData);
-
-    console.log("Submitted!");
-
     navigate("/productlist");
   };
 

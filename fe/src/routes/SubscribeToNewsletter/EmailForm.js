@@ -63,7 +63,7 @@ const EmailForm = () => {
         action="#"
         id="subscriptionForm"
       >
-        <div class={`${"subscribe-form-box__form__vl"} ${messageClass}`}></div>
+        <div className={`${"subscribe-form-box__form__vl"} ${messageClass}`}></div>
         <input
           id="emailInput"
           type="text"

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
-
 import CreateProductList from "./CreateProductList";
-/* import AddProduct from "./AddProduct"; */
 import "./ProductListContent.scss";
-
 import Links from "../../Links";
 
-function ProductListContent() {
+function ProductListContent(props) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const changeUpdatedCheckedState = (updatedCheckedState) => {
+      props.changeUpdatedCheckedState(updatedCheckedState);
+      props.changeUpdatedProducts(products);
+  };
 
   const fetchProductsHandler = useCallback(async () => {
     setIsLoading(true);
@@ -50,7 +51,12 @@ function ProductListContent() {
   let content = <p>Found no products.</p>;
 
   if (products.length > 0) {
-    content = <CreateProductList products={products} />;
+    content = (
+      <CreateProductList
+        products={products}
+        changeUpdatedCheckedState={changeUpdatedCheckedState}
+      />
+    );
   }
 
   if (error) {
@@ -59,13 +65,14 @@ function ProductListContent() {
 
   if (isLoading) {
     content = <p>Loading...</p>;
-  }
+    }
 
   return (
     <div className="content">
       <section>{content}</section>
     </div>
-  );
+    );
+    
 }
 
 export default ProductListContent;

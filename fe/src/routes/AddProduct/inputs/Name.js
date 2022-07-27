@@ -15,8 +15,8 @@ const Name = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-      props.setValue(e.target.value);
-      props.setIsValid(!isEmpty & !hasSpecialChars);
+    props.setValue(e.target.value);
+    props.setIsValid(!isEmpty & !hasSpecialChars);
   };
 
   useImperativeHandle(ref, () => ({

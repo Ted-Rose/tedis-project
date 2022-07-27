@@ -26,6 +26,16 @@
   border: none;
 }
 
+.subscribe-btn:hover {
+  text-decoration-line: underline;
+  color: #4066a5;
+}
+
+.subscribe-btn:active {
+  text-decoration-line: underline;
+  color: #233759;
+}
+
 .subscription-header__logo {
   float: left;
   padding-left: 20px;

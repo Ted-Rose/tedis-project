@@ -42,9 +42,7 @@ const Furniture = forwardRef((props, ref) => {
         !furnitureWidthNotNumber &
         !furnitureLengthIsEmpty &
         !furnitureLengthNotNumber
-      );
-      console.log(furnitureWidthNotNumber);
-      
+    );
   };
 
   const [widthValue, setWidthValue] = useState("");
