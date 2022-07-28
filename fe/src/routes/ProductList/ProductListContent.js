@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import CreateProductList from "./CreateProductList";
 import "./ProductListContent.scss";
 import Links from "../../Links";
 
-function ProductListContent(props) {
+const ProductListContent = forwardRef((props, ref) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const changeUpdatedCheckedState = (updatedCheckedState) => {
-      props.changeUpdatedCheckedState(updatedCheckedState);
-      props.changeUpdatedProducts(products);
+    props.changeUpdatedCheckedState(updatedCheckedState);
+    props.changeUpdatedProducts(products);
   };
 
   const fetchProductsHandler = useCallback(async () => {
@@ -65,14 +71,19 @@ function ProductListContent(props) {
 
   if (isLoading) {
     content = <p>Loading...</p>;
-    }
+  }
+
+  useImperativeHandle(ref, () => ({
+    refreshProductListContent() {
+      fetchProductsHandler();
+    },
+  }));
 
   return (
     <div className="content">
       <section>{content}</section>
     </div>
-    );
-    
-}
+  );
+});
 
 export default ProductListContent;

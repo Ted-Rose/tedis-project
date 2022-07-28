@@ -52,6 +52,7 @@
   position: absolute;
   top: 146px;
   right: 16px;
+  margin: 0px;
   padding: 0;
   border: none;
   background: center no-repeat url("./Images/ic_arrow.svg");
@@ -78,7 +79,7 @@
   color: #b80808;
 }
 
-@media only screen and (min-width: 920px) {
+@media only screen and (min-width: 768px) {
   .subscribe-form-box {
     flex: none;
     width: 663px;

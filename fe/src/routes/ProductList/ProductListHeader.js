@@ -20,10 +20,7 @@ const Header = (props) => {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.text();
-    console.log(data);
-
-    navigate("/productlist");
+    await props.refreshProductListContent();
   }
 
   return (
@@ -35,7 +32,7 @@ const Header = (props) => {
           navigate("/");
         }}
       >
-        Subscribe
+        Newsletter
       </button>
       <button
         className="add-product-btn"
@@ -43,14 +40,14 @@ const Header = (props) => {
           navigate("/addproduct");
         }}
       >
-        ADD
+        Add
       </button>
       <button
         className="delete-product-btn"
         id="delete-product-btn"
         onClick={deleteProducts}
       >
-        DELETE
+        Delete
       </button>
     </div>
   );

@@ -1,8 +1,6 @@
 .product-list-header {
-  height: 55px;
+  height: 66px;
   flex: 0 1 auto;
-  border-bottom: 1px solid #000000;
-  margin: 10px;
   font-family: "HelveticaNeueW01-75Bold", Helvetica, sans-serif;
   color: #000000;
   font-weight: 500;
@@ -12,50 +10,8 @@
 
 .product-list-header h1 {
   float: left;
-  margin: 5px 0 0 5px;
-  font-size: 24px;
+  margin: 15px 0 0 20px;
+  font-size: 22px;
   display: inline;
   text-transform: none;
-}
-
-.add-product-btn {
-  margin-right: 2px;
-  display: inline;
-  float: right;
-  font-size: 14px;
-  line-height: 25px;
-  border: none;
-}
-.delete-product-btn {
-  margin-right: 2px;
-  display: inline;
-  float: right;
-  font-size: 14px;
-  line-height: 25px;
-  border: none;
-}
-
-.product-list-header button {
-  font: inherit;
-  background-color: #240370;
-  color: white;
-  border: 1px solid #240370;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.product-list-header button:hover,
-.product-list-header button:active {
-  background-color: #33059e;
-  border-color: #33059e;
-}
-
-.product-list-header button:disabled,
-.product-list-header button:disabled:hover,
-.product-list-header button:disabled:active {
-  background-color: #ccc;
-  color: #292929;
-  border-color: #ccc;
-  cursor: not-allowed;
 }

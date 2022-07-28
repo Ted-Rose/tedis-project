@@ -96,12 +96,12 @@ const AddProduct = () => {
       nameRef.current.reset();
       priceRef.current.reset();
       specificAttributesRef.current.reset();
-    /* navigate("/productlist"); */
+    navigate("/productlist");
   };
 
   return (
-    <div>
-      <form onSubmit={submitHandler} id="product_form">
+    <div className="Add-Product">
+      <form onSubmit={submitHandler} id="product_form" className="form-control">
         <Sku
           ref={skuRef}
           setValue={changeSkuValue}

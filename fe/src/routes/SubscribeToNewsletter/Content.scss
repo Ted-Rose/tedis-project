@@ -18,7 +18,8 @@
   background: linear-gradient(180deg, #ffffff 0%, #f2f5fa 100%);
 }
 
-.subscribe-content__frame h1 {
+/* .subscribe-content__frame */
+h1 {
   flex: auto;
   margin: 0;
   font-family: "Georgia";
@@ -30,7 +31,7 @@
   color: #131821;
 }
 
-.subscribe-content__frame h2 {
+/* .subscribe-content__frame */ h2 {
   flex: auto;
   padding-top: 10px;
   font-family: "Arial";
@@ -48,8 +49,8 @@
   margin-top: 20px;
 }
 
-@media only screen and (min-width: 920px) {
-  .subscribe-content      {
+@media only screen and (min-width: 768px) {
+  .subscribe-content {
     background-image: none;
   }
 

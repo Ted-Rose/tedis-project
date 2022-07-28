@@ -81,24 +81,22 @@ const Header = (/* { links } */) => {
       </div>
 
       <div className="subscription-header__links">
-        <nav>
-          <button
-            className="subscribe-btn"
-            onClick={() => {
-              navigate("/productlist");
-            }}
-          >
-            Product List
-          </button>
-          <button
-            className="subscribe-btn"
-            onClick={() => {
-              navigate("/addproduct");
-            }}
-          >
-            Add Product
-          </button>
-        </nav>
+        <button
+          className="subscribe-btn"
+          onClick={() => {
+            navigate("/productlist");
+          }}
+        >
+          Product List
+        </button>
+        <button
+          className="subscribe-btn"
+          onClick={() => {
+            navigate("/addproduct");
+          }}
+        >
+          Add Product
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CreateProductList.scss";
+import Checkbox from "../SubscribeToNewsletter/Checkbox";
 
 const getFormattedPrice = (price) => `${Number(price).toFixed(2)} $`;
 
@@ -33,9 +34,9 @@ const CreateProductList = (props) => {
 
   return (
     <ul className="product-list">
-      <div className="cart-value">
+      <h2 className="cart-value">
         Cart total value: {getFormattedPrice(total)}
-      </div>
+      </h2>
       {props.products.map(
         (
           {
@@ -52,20 +53,22 @@ const CreateProductList = (props) => {
             <li key={index} className="product">
               <div>
                 <div>
-                  <input
-                    type="checkbox"
-                    id={`custom-checkbox-${index}`}
-                    name={name}
-                    value={name}
-                    checked={checkedState[index]}
-                    onChange={() => handleOnChange(index)}
-                  />
-                  <h3>{sku}</h3>
-                  <h2>{name}</h2>
-                  <p>{getFormattedPrice(price)}</p>
-                  <p>
+                  <div className="product__SKU-box">
+                    <input
+                      type="checkbox"
+                      id={`custom-checkbox-${index}`}
+                      name={name}
+                      value={name}
+                      checked={checkedState[index]}
+                      onChange={() => handleOnChange(index)}
+                    />
+                    <h2>SKU: {sku}</h2>
+                  </div>
+                  <h2>Product name: {name}</h2>
+                  <h2>Price: {getFormattedPrice(price)}</h2>
+                  <h2>
                     {specificAttribute}: {specificAttributeValue} {measureUnit}{" "}
-                  </p>
+                  </h2>
                 </div>
               </div>
             </li>

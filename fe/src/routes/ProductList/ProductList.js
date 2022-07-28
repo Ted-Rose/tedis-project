@@ -1,10 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./ProductList.scss";
-
 import Header from "./ProductListHeader";
-
 import ProductListContent from "./ProductListContent";
-
 import Footer from "./../Footer";
 
 function ProductList() {
@@ -19,15 +16,23 @@ function ProductList() {
     setUpdatedProducts(updatedProducts);
   };
 
+  const productListContentRef = useRef();
+
+  const refreshProductListContent = () => {
+    productListContentRef.current.refreshProductListContent();
+  };
+
   return (
     <div className="box">
       <Header
         updatedCheckedState={updatedCheckedState}
         updatedProducts={updatedProducts}
+        refreshProductListContent={refreshProductListContent}
       />
       <ProductListContent
         changeUpdatedCheckedState={changeUpdatedCheckedState}
         changeUpdatedProducts={changeUpdatedProducts}
+        ref={productListContentRef}
       />
       <Footer />
     </div>

@@ -2,36 +2,28 @@
   height: 66px;
 }
 
-.subscription-header__links {
-  float: right;
-  padding-right: 1px;
-  padding-top: 21px;
-}
-
-.subscription-header__links nav {
-  display: inline;
-  padding-right: 20px;
-}
-
-.subscribe-btn {
+button {
   text-decoration: none;
   font-family: "Arial";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  margin: 21px 20px 0 0px;
+  float: right;
   line-height: 24px;
+  padding: 0px;
   /* identical to box height, or 171% */
   color: #6a707b;
   background-color: transparent;
   border: none;
 }
 
-.subscribe-btn:hover {
+button:hover {
   text-decoration-line: underline;
   color: #4066a5;
 }
 
-.subscribe-btn:active {
+button:active {
   text-decoration-line: underline;
   color: #233759;
 }
@@ -46,23 +38,26 @@
   display: none;
 }
 
-@media only screen and (min-width: 920px) {
+@media only screen and (min-width: 768px) {
   .subscription-header {
     padding-top: 100px;
     height: 40px;
   }
 
   .subscription-header__links {
-    padding-top: 15px;
-    padding-right: 71px;
+    padding-right: 81px;
     float: right;
+  }
+
+  .subscription-header__links button{
+    margin-top: 15px;
   }
 
   .subscription-header__links nav {
     padding-right: 30px;
   }
 
-  .subscribe-btn {
+  button {
     height: 26px;
     font-size: 16px;
     line-height: 26px;
