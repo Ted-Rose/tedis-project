@@ -5,7 +5,7 @@ const FormValidator = () => {
   const [isTouched, setIsTouched] = useState(false);
   const valueIsEmpty = isTouched && enteredValue.trim() == "";
   const valueNotNumber = !enteredValue.trim() == "" && isNaN(enteredValue);
-  const noSpecialChars = /^[a-zA-Z0-9]{1,100}$/;
+  const noSpecialChars = /^[a-zA-Z0-9 ]+$/;
   const ValueHasSpecialChars =
     !noSpecialChars.test(enteredValue) && !enteredValue.trim() == "";
   const inputClasses =

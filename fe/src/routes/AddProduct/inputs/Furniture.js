@@ -123,7 +123,7 @@ const Furniture = forwardRef((props, ref) => {
       </div>
       <div className={inputClasses}>
         <label htmlFor="length" className="form-label">
-          Length (KG)
+          Length (CM)
         </label>
         <input
           id="length"

@@ -91,8 +91,12 @@ const AddProduct = () => {
       productType: productType,
       specificAttributeValue: specificAttribute,
     };
-    AddProductToDatabase(productFormData);
-    navigate("/productlist");
+      AddProductToDatabase(productFormData);
+      skuRef.current.reset();
+      nameRef.current.reset();
+      priceRef.current.reset();
+      specificAttributesRef.current.reset();
+    /* navigate("/productlist"); */
   };
 
   return (
