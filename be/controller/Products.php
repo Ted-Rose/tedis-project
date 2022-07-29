@@ -29,18 +29,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 if (class_exists($json["productType"]) === FALSE) {
                     throw new CustomException($json["productType"]);
                 } else {
-                    //create $newProduct object in specific product type class
-                    $newProduct = new $json["productType"]($json);
-                    $newProduct->addProduct($json, $newProduct);
+                    //If HTTP body has password send DELETE query.
+                    if ($json["action"] === "delete") {
+                        $deleteProduct = new $json["productType"]($json);
+                        $deleteProduct->deleteProduct($json);
+                        return;
+                    } else {
+                        //If password isn't added in the body add product to database
+                        $newProduct = new $json["productType"]($json);
+                        $newProduct->addProduct($json, $newProduct);
+                        return;
+                    }
                 }
             } catch (CustomException $e) {
                 echo $e->classDoesNotExist();
             }
         } else {
-            echo("'$'json is not array");
+            echo ("'$'json is not array");
         }
     } else {
-        echo("'$'content is false!");
+        echo ("'$'content is false!");
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $content = file_get_contents('php://input', true);
@@ -59,9 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo $e->classDoesNotExist();
             }
         } else {
-            echo("'$'json is not array");
+            echo ("'$'json is not array");
         }
     } else {
-        echo("'$'content is false!");
+        echo ("'$'content is false!");
     }
 }

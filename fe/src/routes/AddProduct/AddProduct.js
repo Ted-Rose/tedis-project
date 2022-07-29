@@ -90,13 +90,14 @@ const AddProduct = () => {
       price: priceValue,
       productType: productType,
       specificAttributeValue: specificAttribute,
+      action: "post",
     };
-      AddProductToDatabase(productFormData);
-      skuRef.current.reset();
-      nameRef.current.reset();
-      priceRef.current.reset();
-      specificAttributesRef.current.reset();
-    navigate("/productlist");
+    AddProductToDatabase(productFormData);
+    skuRef.current.reset();
+    nameRef.current.reset();
+    priceRef.current.reset();
+    specificAttributesRef.current.reset();
+    /*     navigate("/productlist"); */
   };
 
   return (
