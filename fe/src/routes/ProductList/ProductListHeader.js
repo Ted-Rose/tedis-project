@@ -13,9 +13,13 @@ const Header = (props) => {
   };
 
   async function sendDeleteRequest(i) {
-    const response = await fetch(Links["products"], {
+    console.log(props.updatedProducts[i]);
+      const body = {
+          ...props.updatedProducts[i], password:
+          "kfI2KiIMOibKn0X98ufe$M7USeJ$#!G^z78FNbbvI!fng0p*vk"};
+    await fetch(Links["products"], {
       method: "DELETE",
-      body: JSON.stringify(props.updatedProducts[i]),
+      body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
       },
