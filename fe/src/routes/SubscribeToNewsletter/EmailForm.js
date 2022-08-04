@@ -4,7 +4,6 @@ import "./EmailForm.scss";
 
 import AddEmailToDatabase from "./AddEmailToDatabase";
 
-  
 const EmailForm = () => {
   const [message, setMessage] = React.useState("");
   const [emailInput, setEmailInput] = React.useState("");
@@ -41,19 +40,18 @@ const EmailForm = () => {
       setMessage("Email Address not valid!");
     } else {
       setInputHasError(false);
-        setMessage("Thanks for subscribing!");
-        AddEmailToDatabase(emailInput);
-      }
-      setHideErrorMessage(false);
-    };
-    
+      setMessage("Thanks for subscribing!");
+      AddEmailToDatabase(emailInput);
+    }
+    setHideErrorMessage(false);
+  };
 
   const preventDefault = (e) => {
     e.preventDefault();
   };
 
-    const messageClass = inputHasError ? "error" : "approved";
-    const showMessage = hideErrorMessage ? "hide" : "show";
+  const messageClass = inputHasError ? "error" : "approved";
+  const showMessage = hideErrorMessage ? "hide" : "show";
 
   return (
     <div className="subscribe-form-box">
@@ -63,7 +61,9 @@ const EmailForm = () => {
         action="#"
         id="subscriptionForm"
       >
-        <div className={`${"subscribe-form-box__form__vl"} ${messageClass}`}></div>
+        <div
+          className={`${"subscribe-form-box__form__vl"} ${messageClass}`}
+        ></div>
         <input
           id="emailInput"
           type="text"
@@ -75,7 +75,9 @@ const EmailForm = () => {
         />
         <button className="subscribe-submit-button" onClick={onSubmit}></button>
       </form>
-      <div className={`${"message"} ${messageClass} ${showMessage}`}>{message}</div>
+      <div className={`${"message"} ${messageClass} ${showMessage}`}>
+        {message}
+      </div>
     </div>
   );
 };

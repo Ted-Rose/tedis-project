@@ -15,8 +15,11 @@ const Price = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue(e.target.value);
-    props.setIsValid(!isEmpty & !notNumber);
+    props.setValue({ value: e.target.value, name: e.target.name });
+    props.setIsValid({
+      value: !isEmpty & !notNumber,
+      name: e.target.name,
+    });
   };
 
   useImperativeHandle(ref, () => ({
@@ -32,6 +35,7 @@ const Price = forwardRef((props, ref) => {
         id="price"
         type="text"
         value={value}
+        name="priceValue"
         onChange={(e) => {
           valueChangeHandler(e);
           changeValue(e);

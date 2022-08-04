@@ -15,8 +15,11 @@ const Dvd = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue(e.target.value);
-    props.setIsValid(!isEmpty & !notNumber);
+    props.setValue({ value: e.target.value, name: e.target.name });
+    props.setIsValid({
+        value: !isEmpty & !notNumber,
+        name: e.target.name,
+      });
   };
 
   useImperativeHandle(ref, () => ({
@@ -34,12 +37,12 @@ const Dvd = forwardRef((props, ref) => {
         id="dvd"
         type="text"
         value={value}
+        name="specificAttribute"
         onChange={(e) => {
           valueChangeHandler(e);
           changeValue(e);
         }}
         onBlur={inputBlurHandler}
-        name="size"
       />
       {isEmpty && requiredError}
       {notNumber && dataError}

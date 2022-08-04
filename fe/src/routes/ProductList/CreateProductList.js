@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./CreateProductList.scss";
-import Checkbox from "../SubscribeToNewsletter/Checkbox";
 
 const getFormattedPrice = (price) => `${Number(price).toFixed(2)} $`;
 

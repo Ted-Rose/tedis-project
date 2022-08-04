@@ -10,6 +10,35 @@ import AddProductToDatabase from "./AddProductToDatabase";
 
 const AddProduct = () => {
   let navigate = useNavigate();
+  const [inputStates, setInputStates] = useState({
+    skuValue: "",
+    nameValue: "",
+    priceValue: "",
+    specificAttribute: "",
+  });
+
+  const changeInputStates = (e) => {
+    const { name, value } = e;
+    setInputStates((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const [isValid, setIsValid] = useState({
+    skuValue: false,
+    nameValue: false,
+    priceValue: false,
+    specificAttribute: false,
+  });
+
+  const changeIsValid = (e) => {
+    const { name, value } = e;
+    setIsValid((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const [productType, setproductType] = useState("");
 
@@ -17,65 +46,21 @@ const AddProduct = () => {
     setproductType(e);
   };
 
-  const [skuValue, setSkuValue] = useState("");
+  let formIsValid = false;
 
-  const changeSkuValue = (e) => {
-    setSkuValue(e);
-  };
-
-  const [nameValue, setNameValue] = useState("");
-
-  const changeNameValue = (e) => {
-    setNameValue(e);
-  };
-
-  const [priceValue, setPriceValue] = useState("");
-
-  const changePriceValue = (e) => {
-    setPriceValue(e);
-  };
-
-  const [specificAttribute, setSpecificAttribute] = useState("");
-
-  const changeSpecificAttribute = (e) => {
-    setSpecificAttribute(e);
-  };
-
-  const [skuIsValid, setSkuIsValid] = useState(false);
-
-  const changeSkuIsValid = (e) => {
-    setSkuIsValid(e);
-  };
-
-  const [nameIsValid, setNameIsValid] = useState(false);
-
-  const changeNameIsValid = (e) => {
-    setNameIsValid(e);
-  };
-
-  const [priceIsValid, setPriceIsValid] = useState(false);
-
-  const changePriceIsValid = (e) => {
-    setPriceIsValid(e);
-  };
-
-  const [specificAttributesIsValid, setSpecificAttributesIsValid] =
-    useState(false);
-
-  const changeSpecificAttributesIsValid = (e) => {
-    setSpecificAttributesIsValid(e);
-  };
+  if (
+    isValid["skuValue"] &&
+    isValid["nameValue"] &&
+    isValid["priceValue"] &&
+    isValid["specificAttribute"]
+  ) {
+    formIsValid = true;
+  }
 
   const skuRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
   const specificAttributesRef = useRef();
-
-  let formIsValid = false;
-
-  if (skuIsValid && nameIsValid && priceIsValid && specificAttributesIsValid) {
-    formIsValid = true;
-  }
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -83,21 +68,22 @@ const AddProduct = () => {
     if (!formIsValid) {
       return;
     }
-
+    console.log({ inputStates });
     let productFormData = {
-      sku: skuValue,
-      name: nameValue,
-      price: priceValue,
+      sku: inputStates.skuValue,
+      name: inputStates.nameValue,
+      price: inputStates.priceValue,
       productType: productType,
-      specificAttributeValue: specificAttribute,
+      specificAttributeValue: inputStates.specificAttribute,
       action: "post",
     };
+
     AddProductToDatabase(productFormData);
     skuRef.current.reset();
     nameRef.current.reset();
     priceRef.current.reset();
     specificAttributesRef.current.reset();
-    /*     navigate("/productlist"); */
+    navigate("/productlist");
   };
 
   return (
@@ -105,24 +91,24 @@ const AddProduct = () => {
       <form onSubmit={submitHandler} id="product_form" className="form-control">
         <Sku
           ref={skuRef}
-          setValue={changeSkuValue}
-          setIsValid={changeSkuIsValid}
+          setValue={changeInputStates}
+          setIsValid={changeIsValid}
         />
         <Name
           ref={nameRef}
-          setValue={changeNameValue}
-          setIsValid={changeNameIsValid}
+          setValue={changeInputStates}
+          setIsValid={changeIsValid}
         />
         <Price
           ref={priceRef}
-          setValue={changePriceValue}
-          setIsValid={changePriceIsValid}
+          setValue={changeInputStates}
+          setIsValid={changeIsValid}
         />
         <SpecificAttributes
           ref={specificAttributesRef}
-          setValue={changeSpecificAttribute}
+          setValue={changeInputStates}
           changeType={changeProductType}
-          setIsValid={changeSpecificAttributesIsValid}
+          setIsValid={changeIsValid}
         />
         <div className="form-actions">
           <button

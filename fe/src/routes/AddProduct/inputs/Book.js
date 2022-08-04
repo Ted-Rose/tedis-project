@@ -15,8 +15,11 @@ const Book = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue(e.target.value);
-    props.setIsValid(!isEmpty & !notNumber);
+    props.setValue({ value: e.target.value, name: e.target.name });
+    props.setIsValid({
+        value: !isEmpty & !notNumber,
+        name: e.target.name,
+      });
   };
 
   useImperativeHandle(ref, () => ({
@@ -33,17 +36,17 @@ const Book = forwardRef((props, ref) => {
       <input
         id="weight"
         type="text"
+        name="specificAttribute"
         value={value}
         onChange={(e) => {
           valueChangeHandler(e);
           changeValue(e);
         }}
         onBlur={inputBlurHandler}
-        name="weight"
       />
       {isEmpty && requiredError}
       {notNumber && dataError}
-      <label htmlFor="weight" className="description">
+      <label htmlFor="specificAttributeValue" className="description">
         Please provide size in KG
       </label>
     </div>

@@ -9,7 +9,7 @@ const SpecificAttributes = forwardRef((props, ref) => {
   const changeProductType = (e) => {
     props.changeType(e.target.value);
     setproductType(e.target.value);
-    props.setIsValid(false);
+    props.setIsValid({ value: false, name: "specificAttribute" });
   };
 
   const specificAttributeRef = useRef();

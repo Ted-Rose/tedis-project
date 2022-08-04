@@ -34,45 +34,60 @@ const Furniture = forwardRef((props, ref) => {
 
   const changeHeightValue = (e) => {
     setHeightValue(e.target.value);
-    props.setValue(e.target.value + "x" + widthValue + "x" + lengthValue);
-    props.setIsValid(
-      !furnitureHeightIsEmpty &
+    props.setValue({
+      value: e.target.value + "x" + widthValue + "x" + lengthValue,
+      name: e.target.name,
+    });
+    props.setIsValid({
+      value:
+        !furnitureHeightIsEmpty &
         !furnitureHeightNotNumber &
         !furnitureWidthIsEmpty &
         !furnitureWidthNotNumber &
         !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber
-    );
+        !furnitureLengthNotNumber,
+      name: e.target.name,
+    });
   };
 
   const [widthValue, setWidthValue] = useState("");
 
   const changeWidthValue = (e) => {
     setWidthValue(e.target.value);
-    props.setValue(heightValue + "x" + e.target.value + "x" + lengthValue);
-    props.setIsValid(
-      !furnitureHeightIsEmpty &
+    props.setValue({
+      value: heightValue + "x" + e.target.value + "x" + lengthValue,
+      name: e.target.name,
+    });
+    props.setIsValid({
+      value:
+        !furnitureHeightIsEmpty &
         !furnitureHeightNotNumber &
         !furnitureWidthIsEmpty &
         !furnitureWidthNotNumber &
         !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber
-    );
+        !furnitureLengthNotNumber,
+      name: e.target.name,
+    });
   };
 
   const [lengthValue, setLengthValue] = useState("");
 
   const changeLengthValue = (e) => {
     setLengthValue(e.target.value);
-    props.setValue(heightValue + "x" + widthValue + "x" + e.target.value);
-    props.setIsValid(
-      !furnitureHeightIsEmpty &
+    props.setValue({
+      value: heightValue + "x" + widthValue + "x" + e.target.value,
+      name: e.target.name,
+    });
+    props.setIsValid({
+      value:
+        !furnitureHeightIsEmpty &
         !furnitureHeightNotNumber &
         !furnitureWidthIsEmpty &
         !furnitureWidthNotNumber &
         !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber
-    );
+        !furnitureLengthNotNumber,
+      name: e.target.name,
+    });
   };
 
   useImperativeHandle(ref, () => ({
@@ -98,7 +113,7 @@ const Furniture = forwardRef((props, ref) => {
             changeHeightValue(e);
           }}
           onBlur={furnitureHeightBlurHandler}
-          name="height"
+          name="specificAttribute"
         />
         {furnitureHeightIsEmpty && requiredError}
         {furnitureHeightNotNumber && dataError}
@@ -116,7 +131,7 @@ const Furniture = forwardRef((props, ref) => {
             changeWidthValue(e);
           }}
           onBlur={furnitureWidthBlurHandler}
-          name="width"
+          name="specificAttribute"
         />
         {furnitureWidthIsEmpty && requiredError}
         {furnitureWidthNotNumber && dataError}
@@ -134,7 +149,7 @@ const Furniture = forwardRef((props, ref) => {
             changeLengthValue(e);
           }}
           onBlur={furnitureLengthBlurHandler}
-          name="length"
+          name="specificAttribute"
         />
         {furnitureLengthIsEmpty && requiredError}
         {furnitureLengthNotNumber && dataError}

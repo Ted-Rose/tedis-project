@@ -15,8 +15,11 @@ const Sku = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue(e.target.value);
-    props.setIsValid(!isEmpty & !hasSpecialChars);
+    props.setValue({ value: e.target.value, name: e.target.name });
+    props.setIsValid({
+      value: !isEmpty & !hasSpecialChars,
+      name: e.target.name,
+    });
   };
 
   useImperativeHandle(ref, () => ({
@@ -32,6 +35,7 @@ const Sku = forwardRef((props, ref) => {
         id="sku"
         type="text"
         value={value}
+        name="skuValue"
         onChange={(e) => {
           valueChangeHandler(e);
           changeValue(e);
