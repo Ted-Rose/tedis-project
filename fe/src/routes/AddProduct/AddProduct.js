@@ -87,7 +87,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="Add-Product">
+    <div className="add-product-box">
       <form onSubmit={submitHandler} id="product_form" className="form-control">
         <Sku
           ref={skuRef}
