@@ -10,6 +10,7 @@ import AddProductToDatabase from "./AddProductToDatabase";
 
 const AddProduct = () => {
   let navigate = useNavigate();
+
   const [inputStates, setInputStates] = useState({
     skuValue: "",
     nameValue: "",
@@ -68,7 +69,6 @@ const AddProduct = () => {
     if (!formIsValid) {
       return;
     }
-    console.log({ inputStates });
     let productFormData = {
       sku: inputStates.skuValue,
       name: inputStates.nameValue,

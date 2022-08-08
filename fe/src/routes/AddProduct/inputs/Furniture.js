@@ -1,163 +1,77 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
-import FormValidator from "../../../Hooks/FormValidator";
+import { useState, useRef, forwardRef, useImperativeHandle } from "react";
+import FurnitureHeight from "./FurnitureHeight";
+import FurnitureWidth from "./FurnitureWidth";
+import FurnitureLength from "./FurnitureLength";
 
 const Furniture = forwardRef((props, ref) => {
-  const {
-    value: furnitureHeightValue,
-    isEmpty: furnitureHeightIsEmpty,
-    notNumber: furnitureHeightNotNumber,
-    valueChangeHandler: furnitureHeightChangeHandler,
-    inputBlurHandler: furnitureHeightBlurHandler,
-    reset: resetFurnitureHeight,
-    requiredError,
-    dataError,
-    inputClasses,
-  } = FormValidator();
-  const {
-    value: furnitureWidthValue,
-    isEmpty: furnitureWidthIsEmpty,
-    notNumber: furnitureWidthNotNumber,
-    valueChangeHandler: furnitureWidthChangeHandler,
-    inputBlurHandler: furnitureWidthBlurHandler,
-    reset: resetFurnitureWidth,
-  } = FormValidator();
-  const {
-    value: furnitureLengthValue,
-    isEmpty: furnitureLengthIsEmpty,
-    notNumber: furnitureLengthNotNumber,
-    valueChangeHandler: furnitureLengthChangeHandler,
-    inputBlurHandler: furnitureLengthBlurHandler,
-    reset: resetFurnitureLength,
-  } = FormValidator();
+  const [dimensions, setDimensions] = useState({
+    height: "",
+    width: "",
+    length: "",
+  });
 
-  const [heightValue, setHeightValue] = useState("");
+  const changeDimensions = (e) => {
+    const { name, value } = e;
+    setDimensions((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
 
-  const changeHeightValue = (e) => {
-    setHeightValue(e.target.value);
+    const dimensionsArray = [
+      dimensions["height"],
+      dimensions["width"],
+      dimensions["length"],
+    ];
+
     props.setValue({
-      value: e.target.value + "x" + widthValue + "x" + lengthValue,
-      name: e.target.name,
-    });
-    props.setIsValid({
-      value:
-        !furnitureHeightIsEmpty &
-        !furnitureHeightNotNumber &
-        !furnitureWidthIsEmpty &
-        !furnitureWidthNotNumber &
-        !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber,
-      name: e.target.name,
+      value: dimensionsArray.join("x"),
+      name: "specificAttribute",
     });
   };
 
-  const [widthValue, setWidthValue] = useState("");
+  const [isValid, setIsValid] = useState({
+    height: false,
+    width: true,
+    length: true,
+  });
 
-  const changeWidthValue = (e) => {
-    setWidthValue(e.target.value);
-    props.setValue({
-      value: heightValue + "x" + e.target.value + "x" + lengthValue,
-      name: e.target.name,
-    });
-    props.setIsValid({
-      value:
-        !furnitureHeightIsEmpty &
-        !furnitureHeightNotNumber &
-        !furnitureWidthIsEmpty &
-        !furnitureWidthNotNumber &
-        !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber,
-      name: e.target.name,
-    });
+  const changeIsValid = (e) => {
+    const { name, value } = e;
+    setIsValid((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    props.setIsValid((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const [lengthValue, setLengthValue] = useState("");
-
-  const changeLengthValue = (e) => {
-    setLengthValue(e.target.value);
-    props.setValue({
-      value: heightValue + "x" + widthValue + "x" + e.target.value,
-      name: e.target.name,
-    });
-    props.setIsValid({
-      value:
-        !furnitureHeightIsEmpty &
-        !furnitureHeightNotNumber &
-        !furnitureWidthIsEmpty &
-        !furnitureWidthNotNumber &
-        !furnitureLengthIsEmpty &
-        !furnitureLengthNotNumber,
-      name: e.target.name,
-    });
-  };
+  const dimensionsRef = useRef();
 
   useImperativeHandle(ref, () => ({
     reset() {
-      resetFurnitureHeight();
-      resetFurnitureWidth();
-      resetFurnitureLength();
+      dimensionsRef.current.reset();
     },
   }));
 
   return (
     <div id="Furniture">
-      <div className={inputClasses}>
-        <label htmlFor="height" className="form-label">
-          Height (CM)
-        </label>
-        <input
-          id="height"
-          type="text"
-          value={furnitureHeightValue}
-          onChange={(e) => {
-            furnitureHeightChangeHandler(e);
-            changeHeightValue(e);
-          }}
-          onBlur={furnitureHeightBlurHandler}
-          name="specificAttribute"
-        />
-        {furnitureHeightIsEmpty && requiredError}
-        {furnitureHeightNotNumber && dataError}
-      </div>
-      <div className={inputClasses}>
-        <label htmlFor="width" className="form-label">
-          Width (CM)
-        </label>
-        <input
-          id="width"
-          type="text"
-          value={furnitureWidthValue}
-          onChange={(e) => {
-            furnitureWidthChangeHandler(e);
-            changeWidthValue(e);
-          }}
-          onBlur={furnitureWidthBlurHandler}
-          name="specificAttribute"
-        />
-        {furnitureWidthIsEmpty && requiredError}
-        {furnitureWidthNotNumber && dataError}
-      </div>
-      <div className={inputClasses}>
-        <label htmlFor="length" className="form-label">
-          Length (CM)
-        </label>
-        <input
-          id="length"
-          type="text"
-          value={furnitureLengthValue}
-          onChange={(e) => {
-            furnitureLengthChangeHandler(e);
-            changeLengthValue(e);
-          }}
-          onBlur={furnitureLengthBlurHandler}
-          name="specificAttribute"
-        />
-        {furnitureLengthIsEmpty && requiredError}
-        {furnitureLengthNotNumber && dataError}
-        <br />
-        <label htmlFor="height width length" className="form-label">
-          Please provide dimensions in HxWxL format
-        </label>
-      </div>
+      <FurnitureHeight
+        changeDimensions={changeDimensions}
+        changeIsValid={changeIsValid}
+        ref={dimensionsRef}
+      />
+      <FurnitureWidth
+        changeDimensions={changeDimensions}
+        changeIsValid={changeIsValid}
+        ref={dimensionsRef}
+      />
+      <FurnitureLength
+        changeDimensions={changeDimensions}
+        changeIsValid={changeIsValid}
+        ref={dimensionsRef}
+      />
     </div>
   );
 });

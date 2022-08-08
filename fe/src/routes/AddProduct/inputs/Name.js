@@ -17,9 +17,9 @@ const Name = forwardRef((props, ref) => {
   const changeValue = (e) => {
     props.setValue({ value: e.target.value, name: e.target.name });
     props.setIsValid({
-        value: !isEmpty & !hasSpecialChars,
-        name: e.target.name,
-      });
+      value: !isEmpty & !hasSpecialChars,
+      name: e.target.name,
+    });
   };
 
   useImperativeHandle(ref, () => ({

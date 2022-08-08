@@ -12,14 +12,16 @@ const SpecificAttributes = forwardRef((props, ref) => {
     props.setIsValid({ value: false, name: "specificAttribute" });
   };
 
-  const specificAttributeRef = useRef();
-
   const changeSpecificAttribute = (e) => {
-    props.setValue(e);
+      props.setValue(e);
+
   };
 
   const changeSpecificAttributesIsValid = (e) => {
-    props.setIsValid(e);
+    props.setIsValid({
+      value: e,
+      name: "specificAttribute",
+    });
   };
   const typeSwitcherOptions = [
     {
@@ -39,6 +41,8 @@ const SpecificAttributes = forwardRef((props, ref) => {
       value: "book",
     },
   ];
+
+  const specificAttributeRef = useRef();
 
   useImperativeHandle(ref, () => ({
     reset() {

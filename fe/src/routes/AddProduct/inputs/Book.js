@@ -30,7 +30,7 @@ const Book = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="weight" className="inputLabel">
+      <label htmlFor="specificAttribute" className="inputLabel">
         Weight (KG)
       </label>
       <input
@@ -46,7 +46,7 @@ const Book = forwardRef((props, ref) => {
       />
       {isEmpty && requiredError}
       {notNumber && dataError}
-      <label htmlFor="specificAttributeValue" className="description">
+      <label htmlFor="specificAttribute" className="description">
         Please provide size in KG
       </label>
     </div>

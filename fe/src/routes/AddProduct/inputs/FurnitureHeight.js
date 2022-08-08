@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle } from "react";
 import FormValidator from "../../../Hooks/FormValidator";
 
-const Dvd = forwardRef((props, ref) => {
+const FurnitureHeight = forwardRef((props, ref) => {
   const {
     value,
     isEmpty,
@@ -15,11 +15,11 @@ const Dvd = forwardRef((props, ref) => {
   } = FormValidator();
 
   const changeValue = (e) => {
-    props.setValue({ value: e.target.value, name: e.target.name });
-    props.setIsValid({
-        value: !isEmpty & !notNumber,
-        name: e.target.name,
-      });
+    props.changeDimensions({ value: e.target.value, name: e.target.name });
+    props.changeIsValid({
+      value: !isEmpty & !notNumber,
+      name: e.target.name,
+    });
   };
 
   useImperativeHandle(ref, () => ({
@@ -30,14 +30,14 @@ const Dvd = forwardRef((props, ref) => {
 
   return (
     <div className={inputClasses}>
-      <label htmlFor="specificAttribute" className="inputLabel">
-        Size (MB)
+      <label htmlFor="height" className="inputLabel">
+        Height (CM)
       </label>
       <input
-        id="dvd"
+        id="height"
         type="text"
+        name="height"
         value={value}
-        name="specificAttribute"
         onChange={(e) => {
           valueChangeHandler(e);
           changeValue(e);
@@ -46,10 +46,8 @@ const Dvd = forwardRef((props, ref) => {
       />
       {isEmpty && requiredError}
       {notNumber && dataError}
-      <label htmlFor="specificAttribute" className="description">
-        Please provide size in MB
-      </label>
     </div>
   );
 });
-export default Dvd;
+
+export default FurnitureHeight;
